@@ -5,7 +5,7 @@ mathjax: true
 ---
 
 <p class="message">
-  Hey there Aditya $\alpha$! This page is included as an example. Feel free to customize it for your own use upon downloading. Carry on!
+  Hey there Aditya Jaishankar $\alpha$! This page is included as an example. Feel free to customize it for your own use upon downloading. Carry on!
 </p>
 
 
