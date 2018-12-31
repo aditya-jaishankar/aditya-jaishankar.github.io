@@ -1,25 +1,35 @@
-# Dependencies
-markdown:         kramdown
-# pygments:         true
-highlighter:      rouge
-
 # Permalinks
-permalink:        pretty
+permalink:           pretty
+highlighter:         pygments
 
 # Setup
-title:            Aditya Jaishankar
-tagline:          'Portfolio docs changed again and again'
-description:      'Listing of my portfolio changed'
-url:              http://lanyon.getpoole.com
+title:               Aditya Jaishankar
+tagline:             Portfolio
+url:                 https://aditya-jaishankar.github.io/
+paginate:            1
+baseurl:             ""
 
+# Assets
+#
+# We specify the directory for Jekyll so we can use @imports.
+sass:
+  sass_dir:          _sass
+  style:            :compressed
+
+# About/contact
 author:
-  name:           'Mark Otto'
-  url:            https://twitter.com/mdo
-
-paginate:         5
+  name:              Aditya Jaishankar
+  url:               https://aditya-jaishankar.github.io/
 
 # Custom vars
-version:          2.0.0
-
+version:             2.0.0
 github:
-  repo:           https://github.com/poole/lanyon
+  repo:              https://github.com/aditya-jaishankar/aditya-jaishankar.github.io
+
+# Gems
+plugins:
+  - jekyll-paginate
+  - jekyll-gist
+
+# Pages list that changes the links on the top of the website
+pages_list:       {'About':'/about','Archive':'/archive','Feed':'/atom.xml'}
