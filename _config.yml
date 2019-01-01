@@ -1,14 +1,14 @@
 # Permalinks
 permalink:           pretty
-highlighter:         pygments
+highlighter:         rouge
 
 # Setup
 title:               Aditya Jaishankar
 tagline:             Portfolio
 url:                 https://aditya-jaishankar.github.io/
-paginate:            1
-baseurl:             ""
-
+paginate:            5
+# baseurl:             ""
+excerpt_separator: <!--more-->
 # Assets
 #
 # We specify the directory for Jekyll so we can use @imports.
@@ -31,5 +31,12 @@ plugins:
   - jekyll-paginate
   - jekyll-gist
 
-# Pages list that changes the links on the top of the website
-pages_list:       {'About':'/about','Archive':'/archive','Feed':'/atom.xml'}
+# Pages list that changes the links on the top of the website. Change this if you add more pages
+# Consider adding an XML feed link below: 'Feed':'/atom.xml'
+# Consider adding an XML feed link below: 'Projects':'/projects'. There seems to be an issue on how to have a paginator 
+# selectively display only certain categories. Might have to fiddle with collections. See here: 
+pages_list:       {'About':'/about',
+                  'Coursework':'/coursework',
+                  'Ph.D. Research':'/research',
+                  'Archive':'/archive', 
+                  'CV':'/CV.pdf',}

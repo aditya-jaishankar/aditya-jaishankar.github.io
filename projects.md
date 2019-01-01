@@ -1,24 +1,18 @@
 ---
 layout: default
-title: Home
+title: Projects
 ---
 
-Small about me box. Perhaps remove the about section
-
-<h1>Featured projects</h1>
-<h1>Recent posts</h1>
-
-Add categories with links to all these posts. See <a href="https://christianspecht.de/">here</a>: 
-
+Is this printing?
 <div class="posts">
   {% for post in paginator.posts %}
   <hr>
   <article class="post">
-    <h2 class="post-title">
+    <h1 class="post-title">
       <a href="{{ site.baseurl }}{{ post.url }}">
         {{ post.title }}
       </a>
-    </h2>
+    </h1>
 
     <time datetime="{{ post.date | date_to_xmlschema }}" class="post-date">{{ post.date | date_to_string }}</time>
 
