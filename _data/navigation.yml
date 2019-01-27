@@ -1,9 +1,11 @@
 # main links
 main:
+  - title: "Home"
+    url: /
   - title: "Coursework"
     url: /coursework/
   - title: "Projects"
-    url: /projectcats/
+    url: /projects/
   - title: "Blog"
     url: /year-archive/
   - title: "Ph.D. Research"

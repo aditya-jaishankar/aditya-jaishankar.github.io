@@ -1,6 +1,6 @@
 ---
 title: "List of Projects by Tag"
-permalink: /projectcats/
+permalink: /projects/
 author_profile: true
 layout: single
 ---
