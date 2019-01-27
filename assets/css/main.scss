@@ -1,0 +1,94 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+
+@charset "utf-8";
+
+@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
+
+/* system typefaces */
+$serif      : Georgia, Times, serif;
+$sans-serif : "Open Sans", -apple-system, BlinkMacSystemFont, "Roboto", "Lato", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif;
+$monospace  : Consolas, Monaco, "Lucida Console", monospace;
+
+// One light theme: https://github.com/purpleKarrot/base16-one-light-scheme/blob/master/one-light.yaml
+
+// $base00: #fafafa !important;
+// $base01: #f0f0f1 !important;
+// $base02: #e5e5e6 !important;
+// $base03: #a0a1a7 !important;
+// $base04: #696c77 !important;
+// $base05: #383a42 !important;
+// $base06: #202227 !important;
+// $base07: #090a0b !important;
+// $base08: #ca1243 !important;
+// $base09: #d75f00 !important;
+// $base0a: #c18401 !important;
+// $base0b: #50a14f !important;
+// $base0b: #0184bc !important;
+// $base0d: #4078f2 !important;
+// $base0e: #a626a4 !important;
+// $base0f: #986801 !important;
+
+
+// Default light theme: https://github.com/chriskempson/base16-default-schemes/blob/master/default-light.yaml
+
+// This is quite minimal and nice
+
+// $base00: #f8f8f8 !important;
+// $base01: #e8e8e8 !important;
+// $base02: #d8d8d8 !important;
+// $base03: #b8b8b8 !important;
+// $base04: #585858 !important;
+// $base05: #383838 !important;
+// $base06: #282828 !important;
+// $base07: #181818 !important;
+// $base08: #ab4642 !important;
+// $base09: #dc9656 !important;
+// $base0a: #f7ca88 !important;
+// $base0b: #a1b56c !important;
+// $base0c: #86c1b9 !important;
+// $base0d: #7cafc2 !important;
+// $base0e: #ba8baf !important; // #ba8baf
+// $base0f: #a16946 !important;
+
+// GitHub theme: https://github.com/Defman21/base16-github-scheme/blob/master/github.yaml
+
+$base00: #fafafa; // changed this value from #ffffff
+$base01: #f5f5f5; 
+$base02: #c8c8fa; 
+$base03: #969896; 
+$base04: #969896; // changed this value from #e8e8e8 (comment color) 
+$base05: #333333; 
+$base06: #ffffff; 
+$base07: #ffffff; 
+$base08: #ed6a43; 
+$base09: #0086b3; 
+$base0a: #795da3; 
+$base0b: #183691; 
+$base0c: #183691; 
+$base0d: #795da3; 
+$base0e: #a71d5d; 
+$base0f: #333333; 
+
+// iA light theme: https://github.com/arzg/base16-ia-scheme/blob/master/ia-light.yaml
+
+// $base00: #f6f6f6;
+// $base01: #dedede;
+// $base02: #bde5f2;
+// $base03: #898989;
+// $base04: #767676;
+// $base05: #181818;
+// $base06: #e8e8e8;
+// $base07: #f8f8f8;
+// $base08: #9c5a02;
+// $base09: #c43e18;
+// $base0a: #c48218;
+// $base0b: #38781c;
+// $base0b: #2d6bb1;
+// $base0d: #48bac2;
+// $base0e: #a94598;
+// $base0f: #8b6c37;
+
+@import "minimal-mistakes"; // main partials
+

@@ -1,59 +1,17 @@
 ---
-layout: default
-title: Home
+layout: home
+author_profile: true
+sidebar: docs
 ---
 
-Small about me box. Perhaps remove the about section
+$1 + e^{i\pi} = 0$ was voted most beautiful equation
 
-<h1>Featured projects</h1>
-<h1>Recent posts</h1>
+$$
+1 + e^{i\pi} = 0
+$$
 
-Add categories with links to all these posts. See <a href="https://christianspecht.de/">here</a>: 
+Things yet to do:
+<li> Add a google search box. See instructions <a href="https://mmistakes.github.io/minimal-mistakes/docs/configuration/#google-custom-search-engine">here</a></li>
+<li> Set up google analytics. Instructions also available in the link above</li>
 
-<div class="posts">
-  {% for post in paginator.posts %}
-  <hr>
-  <article class="post">
-    <h2 class="post-title">
-      <a href="{{ site.baseurl }}{{ post.url }}">
-        {{ post.title }}
-      </a>
-    </h2>
-
-    <time datetime="{{ post.date | date_to_xmlschema }}" class="post-date">{{ post.date | date_to_string }}</time>
-
-   <!-- {{ post.excerpt}} -->
-    <em>{{post.sub-title}}</em>
-  </article>
-  {% endfor %}
-</div>
-<!--
-<div class="pagination">
-  {% if paginator.next_page %}
-    <a class="pagination-item older" href="{{ paginator.next_page_path | prepend: site.baseurl }}">Older</a>
-  {% else %}
-    <span class="pagination-item older">Older</span>
-  {% endif %}
-  {% if paginator.previous_page %}
-    <a class="pagination-item newer" href="{{ paginator.previous_page_path | prepend: site.baseurl }}">Newer</a>
-  {% else %}
-    <span class="pagination-item newer">Newer</span>
-  {% endif %}
-</div>
--->
-<div class="pagination">
-  {% if paginator.total_pages > 1 %}
-  <ul class="pager main-pager">
-    {% if paginator.previous_page %}
-    <h6 class="previous">
-      <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; Newer Posts</a>
-    </h6>
-    {% endif %}
-    {% if paginator.next_page %}
-    <h6 class="next">
-      <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older Posts &rarr;</a>
-    </h6>
-    {% endif %}
-  </ul>
-  {% endif %}
-</div>
+Does my <a href="/_posts/2019-01-25-testing/">testing site</a> work?
