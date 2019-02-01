@@ -8,7 +8,7 @@
 
 /* system typefaces */
 $serif      : Georgia, Times, serif;
-$sans-serif : "Roboto", "Lato", "Open Sans", -apple-system, BlinkMacSystemFont, "Lato", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif;
+$sans-serif : "Crimson Text", "Quattrocento Sans", "Raleway", "Roboto", "Lato", "Open Sans", -apple-system, BlinkMacSystemFont, "Lato", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif;
 $monospace  : Consolas, Monaco, "Lucida Console", monospace;
 
 // One light theme: https://github.com/purpleKarrot/base16-one-light-scheme/blob/master/one-light.yaml
@@ -55,7 +55,7 @@ $monospace  : Consolas, Monaco, "Lucida Console", monospace;
 // GitHub theme: https://github.com/Defman21/base16-github-scheme/blob/master/github.yaml
 
 $base00: #fafafa; // changed this value from #ffffff
-$base01: #f5f5f5; 
+$base01: #f5f5f5; // changed from f5f5f5 
 $base02: #c8c8fa; 
 $base03: #969896; 
 $base04: #969896; // changed this value from #e8e8e8 (comment color) 

@@ -10,21 +10,29 @@ toc: true
 
 This repository collects all resoures and material that I am using towards learning Machine Learning and Artificial Intelligence. 
 
-TESTING OUT THE PROBABILITY COURSEWORK IF THIS WORKS. CLICK [HERE](/coursenotes/probability/)
-
 None of this material is mine. I have collected them from various sources on Github and elsewhere. Many thanks to [josephmisiti](https://github.com/josephmisiti/awesome-machine-learning), [jhermann](https://github.com/jhermann/awesome-python-talks), [kirang89](https://github.com/kirang89/pycrumbs), [ujjwalkarn](https://github.com/ujjwalkarn/Machine-Learning-Tutorials), [s16h](https://github.com/s16h/py-must-watch), [datasciencemasters](https://github.com/datasciencemasters/go), and [hangtwenty](https://github.com/hangtwenty/dive-into-machine-learning). Much of my thinking and plans have been shaped by their awesome lists of resources. 
 
 ## The Basics and the General
-* [Learning How to Learn: Powerful mental tools to help you master tough subjects](https://www.coursera.org/learn/learning-how-to-learn) `completed`
-* [Introduction to Computer Science and Programming using Python](https://www.edx.org/course/introduction-to-computer-science-and-programming-using-python) `completed`
+* [Learning How to Learn: Powerful mental tools to help you master tough subjects](https://www.coursera.org/learn/learning-how-to-learn)
+* [Introduction to Computer Science and Programming using Python](https://www.edx.org/course/introduction-to-computer-science-and-programming-using-python)
 * [Python for Data Science](https://www.edx.org/course/python-data-science-uc-san-diegox-dse200x)
 * [Probability - The Science and Uncertainty of Data](https://courses.edx.org/courses/course-v1:MITx+6.431x+3T2018/course/)
+  [Course Notes](/coursenotes/probability/){: .btn .btn--success .btn--default}
 * [Algorithm Design and Techniques](https://courses.edx.org/courses/course-v1:UCSanDiegoX+ALGS200x+2T2017/course/)
+  [Course Notes](/coursenotes/algorithms/){: .btn .btn--success .btn--default}
+* [Computational Fluid Dynamics (CFD)-Python](http://lorenabarba.com/blog/cfd-python-12-steps-to-navier-stokes/) 
+  [Course Notes](/coursenotes/CFDpython){: .btn .btn--success .btn--default}
+* [Fundamentals of Statistics](www.edx.org)
+  [Course Notes](/coursenotes/statisticsfun){: .btn .btn--success .btn--default}  
 * [Introduction to Computational Thinking and Data Science](https://www.edx.org/course/introduction-computational-thinking-data-mitx-6-00-2x-6)
 * [Probability and Statistics in Data Science using Python](https://www.edx.org/course/statistics-and-probability-in-data-science-using-python)
 * [Effective Thinking Through Mathematics](https://www.edx.org/course/effective-thinking-through-mathematics-utaustinx-ut-9-01x-0)
 
 ## Machine Learning
+* [Kevin Markham: Machine Learning in Python with `sklearn`](https://www.youtube.com/playlist?list=PL5-da3qGB5ICeMbQuqbbCOQWcS6OYBr5A)
+  [Course Notes](/coursenotes/markhamsklearn){: .btn .btn--success .btn--default}
+* [Kevin Markham: `pandas`](https://www.youtube.com/watch?v=yzIMircGU5I&list=PL5-da3qGB5ICCsgW1MxlZ0Hq8LL5U3u9y)
+  [Course Notes](/coursenotes/markhampandas){: .btn .btn--success .btn--default}
 * [Machine learning crash course](https://developers.google.com/machine-learning/crash-course/) - Google Devs, Highly recommended
 * [Introduction to machine learning for coders - fast.ai](https://course.fast.ai/ml)
 * [Introduction to Machine Learning with scikit-learn](http://blog.kaggle.com/2015/04/08/new-video-series-introduction-to-machine-learning-with-scikit-learn/)
