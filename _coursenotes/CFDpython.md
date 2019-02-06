@@ -690,6 +690,173 @@ where $V_j^n$ is the amplitude of the $j$-th harmonic.
 
 The stability criterion states that the amplitude of no harmonic grows indefinitely as $n \to \infty$. We define the amplification factor $G=\frac{V^{n+1}}{V^n}$. The stability criterion requires that $\lvert G \rvert \leq 1$ for all $\phi_j = j\pi/N, j \in [-N, N]$. We show a simple example below. 
 
+Consider again the wave equation that uses a forward difference in time and a central difference in space:
+
+$$
+\begin{align}
+\dfrac{u_i^{n+1}} - u_i^n}{\Delta t} + \dfrac{c}{2\Dekta x}(u_{i+1}^n - u_{i-1}^n) = 0
+\end{align}
+$$
+
+Setting $\sigma = c\Delta t/\Delta x$ and writing in explicit form, 
+
+$$
+\begin{align}
+u_i^{n+1} = u)i^n -\dfrac{\sigma}{2}\left(u_{i+1} ^n - u_{i-1} ^n\right) \label{eqn:wave-discrete-neumann}
+\end{align}
+$$
+
+Now we replace all terms of the form $u_{i+m} ^{n+k}$ by its Fourier expansion
+
+$$
+\begin{align}
+V^{n+k} e^{I(i+m)\phi}
+\end{align}
+$$
+
+Note we can essentially ignore the subscript $j$ because from orthonormality of Fourier modes, if the sum of the different modes is zero, then the Fourier coefficient of each individual mode should be zero. Substiuting the Fourier expansion into Equation~\ref{eqn:wave-discrete-neumann}, we have
+
+$$
+\begin{align}
+V^{n+1} e^{I(i)\phi} = V^{n} e^{I(i)\phi} - \dfrac{\sigma}{2}\left(V^{n} e^{I(i+1)\phi} - V^{n+1} e^{I(i-1)\phi})
+\end{align}
+$$
+
+Simplifying and rearranging, we find that the amplication factor $G$ is given by
+
+$$
+\begin{align}
+G = \dfrac{V^{n+1}{V^n}} = 1 - \dfrac{\sigma}{2}(2I\sin\phi)
+\end{align}
+$$
+
+Requiring that $\lvert G \rvert < 1$ means that $\sqrt{1+\sigma^2\sin^2\phi} < 1$ which is never the case. Therefore, this numerical scheme that is forward differnece in time and central difference in space in *unconditionally unstable*. This means that there are no conditions under which the scheme exhibits stability. Of course one could imagine schemes that are unconditonally stable (forward difference in time and implicit central difference in space), conditionally stable (explicit first order in time and backward difference in space). 
+
+## Computation of the Navier-Stokes Equations
+
+The Navier-Stokes equation is the statement of conservation of momentun in differential form, and this coupled with the continuity equation (statement of mass conservation in differential form) allows us to solve for flows of Newtonian fluids under various conditions of pressure. However there seems to be a problem: at first sight there seems to be no obvious way to couple the velocity with pressure as there isn't a consitutive equation. We get around this fact by recognizing that we can write a Poisson equation for pressure that can be solved. Consider again the 2D Navier stokes equations:
+
+$$
+\begin{align}
+\frac{\partial u}{\partial t}+u\frac{\partial u}{\partial x}+v\frac{\partial u}{\partial y} & = -\frac{1}{\rho}\frac{\partial p}{\partial x}+\nu \left(\frac{\partial^2 u}{\partial x^2}+\frac{\partial^2 u}{\partial y^2} \right) \label{eqn:nsu}\\
+
+\frac{\partial v}{\partial t}+u\frac{\partial v}{\partial x}+v\frac{\partial v}{\partial y} = -\frac{1}{\rho}\frac{\partial p}{\partial y}+\nu\left(\frac{\partial^2 v}{\partial x^2}+\frac{\partial^2 v}{\partial y^2}\right) \label{eqn:nsv}
+\end{align}
+$$
+
+Partially differentiating Equations \ref{eqn:nsu} and \ref{eqn:nsv} by $x$ and $y$ respectively, and adding the resulting two equations (while setting all terms that involve the divergence of velocity to 0) we obtain a Poisson equation for pressure:
+
+$$
+\begin{align}
+\frac{\partial^2 p}{\partial x^2}+\frac{\partial^2 p}{\partial y^2} = -\rho\left(\frac{\partial u}{\partial x}\frac{\partial u}{\partial x}+2\frac{\partial u}{\partial y}\frac{\partial v}{\partial x}+\frac{\partial v}{\partial y}\frac{\partial v}{\partial y} \right)
+\end{align}
+$$
+
+We can  discretize the equations (using a forward difference for time, a backward difference for space and a central difference for diffusive terms) as follows:
+
+$$
+\begin{align}
+& \frac{u_{i,j}^{n+1}-u_{i,j}^{n}}{\Delta t}+u_{i,j}^{n}\frac{u_{i,j}^{n}-u_{i-1,j}^{n}}{\Delta x}+v_{i,j}^{n}\frac{u_{i,j}^{n}-u_{i,j-1}^{n}}{\Delta y} = \\ 
+& \qquad -\frac{1}{\rho}\frac{p_{i+1,j}^{n}-p_{i-1,j}^{n}}{2\Delta x}+\nu\left(\frac{u_{i+1,j}^{n}-2u_{i,j}^{n}+u_{i-1,j}^{n}}{\Delta x^2}+\frac{u_{i,j+1}^{n}-2u_{i,j}^{n}+u_{i,j-1}^{n}}{\Delta y^2}\right)
+\end{align}
+$$
+
+$$
+\begin{align}
+&\frac{v_{i,j}^{n+1}-v_{i,j}^{n}}{\Delta t}+u_{i,j}^{n}\frac{v_{i,j}^{n}-v_{i-1,j}^{n}}{\Delta x}+v_{i,j}^{n}\frac{v_{i,j}^{n}-v_{i,j-1}^{n}}{\Delta y} = \\
+& \qquad -\frac{1}{\rho}\frac{p_{i,j+1}^{n}-p_{i,j-1}^{n}}{2\Delta y}
++\nu\left(\frac{v_{i+1,j}^{n}-2v_{i,j}^{n}+v_{i-1,j}^{n}}{\Delta x^2}+\frac{v_{i,j+1}^{n}-2v_{i,j}^{n}+v_{i,j-1}^{n}}{\Delta y^2}\right)
+\end{align}
+$$
+
+$$
+\begin{align}
+& \frac{p_{i+1,j}^{n}-2p_{i,j}^{n}+p_{i-1,j}^{n}}{\Delta x^2}+\frac{p_{i,j+1}^{n}-2p_{i,j}^{n}+p_{i,j-1}^{n}}{\Delta y^2} = \\
+& \qquad \rho \left[ \frac{1}{\Delta t}\left(\frac{u_{i+1,j}-u_{i-1,j}}{2\Delta x}+\frac{v_{i,j+1}-v_{i,j-1}}{2\Delta y}\right) -\frac{u_{i+1,j}-u_{i-1,j}}{2\Delta x}\frac{u_{i+1,j}-u_{i-1,j}}{2\Delta x} - 2\frac{u_{i,j+1}-u_{i,j-1}}{2\Delta y}\frac{v_{i+1,j}-v_{i-1,j}}{2\Delta x} - \frac{v_{i,j+1}-v_{i,j-1}}{2\Delta y}\frac{v_{i,j+1}-v_{i,j-1}}{2\Delta y}\right]
+\end{align}
+$$
+
+Note that in the numerical scheme, we ideally want a divergence free velocity in the next step, so we can impose $\vec{\nabla}\cdot \vec{u} ^{n+1} = 0$. However, because of numerical and other errors, we cannot guarantee that in the current timestep $\vec{\nabla}\cdot \vec{u} ^{n} = 0$. So we *cannot* impose $\vec{\nabla}\cdot \vec{u} ^{n} = 0$ and we retain this terms in the computations. The three equation above look rather formidable so we will solve it in steps. 
+
+## Step 9: Laplace Equation
+
+Discretizing the Laplace equation for pressure,
+
+$$
+\begin{align}
+\frac{p_{i+1, j}^n - 2p_{i,j}^n + p_{i-1,j}^n}{\Delta x^2} + \frac{p_{i,j+1}^n - 2p_{i,j}^n + p_{i, j-1}^n}{\Delta y^2} = 0
+\end{align}
+$$
+
+Note that there is no time derivative in this equation. Conceptually, we could think of this equation as the steady state (i.e.) long time solution of an equation containing a time derivative. We can therefore, introduce an artificial time derivative and then solve the system iteratively for a number of timesteps until convergence is obtained. We can test for convergence by assuming some critetion of the L2 norm of $p ^{n} - p ^{n-1}$, for example, that it is smaller than some crticial value. 
+
+We rearrange the above discretized equation to find $p_{i, j} ^n$ in terms of the other quantites:
+
+$$
+\begin{align}
+p_{i,j}^n = \frac{\Delta y^2(p_{i+1,j}^n+p_{i-1,j}^n)+\Delta x^2(p_{i,j+1}^n + p_{i,j-1}^n)}{2(\Delta x^2 + \Delta y^2)}
+\end{align}
+$$
+
+Because there are four other quantities $p_{i-1,j}^n, p_{i,j-1}^n, p_{i+1,j}^n, p_{i,j+1}^n$ that feed into $p_{i,j}^n$, this is known as the five point difference operator and is one of the most widely used numerical schemes for the Laplacian operator.  Let us now implement the solution of the discretized equation in Python. We assume an initial state of $p=0$ everywhere, and use the following boundary conditions:
+
+$$
+\begin{align}
+ & p = 0 \textrm{ at } x = 0 \\
+& p = y \textrm{ at } x = 2 \\
+& \dfrac{\partial p}{\partial y}=0$ \textrm{ at } y=0, 1
+\end{align}
+$$
+
+```python
+
+insert the code here and include any plots
+use my solution
+```
+
+## Step 10: 2D Poisson Equation
+
+In this next step we solve the Poisson equation, which adds a source term to the Laplace equation. As we discussed above, deriving the Poisson equation for pressure allows us to couple the velocity fields and the pressure fields while numerically solving the Navier-Stokes equations. Because we have seen so many examples of obtaining the discretized equations, we simply provide the result here:
+
+$$
+\begin{align}
+p_{i,j}^{n}=\frac{(p_{i+1,j}^{n}+p_{i-1,j}^{n})\Delta y^2+(p_{i,j+1}^{n}+p_{i,j-1}^{n})\Delta x^2-b_{i,j}^{n}\Delta x^2\Delta y^2}{2(\Delta x^2+\Delta y^2)}
+\end{align}
+$$
+
+The intial and boundary conditions are the same as before, but we the intial conditon on the source term is as follows:
+
+$$
+\begin{align}
+b_{i,j}=100 \textrm{ at } i=\frac{1}{4}nx, j=\frac{1}{4}ny \\
+b_{i,j}=-100 \textrm{ at } i=\frac{3}{4}nx, j=\frac{3}{4}ny \\
+b_{i,j}=0 \textrm{ otherwise}
+\end{align}
+$$
+
+```python
+insert my code here.
+use my solution and the modified density plots
+```
+
+## Step 11: Cavity flow with Navier Stokes
+
+We are finally ready to put everything together to solve a realistic Navier Stokes problem. Below, we solve the cavity flow problem, i.e., the flow of liquid inside a boxed container with a constant flow at the open surface. More formally, the initial and boundary conditions are:
+
+$$
+\begin{align}
+u, v, p = 0 \textrm{ everywhere at } t = 0 \\
+u=1 \textrm{ at } y=2 \textrm{ (the "lid") }\\
+u, v=0 \textrm{ on the other boundaries}\\
+\dfrac{\partial p}{\partial y}=0 \textrm{ at } y=0\\
+p=0 \textrm{ at } y=2\\
+\dfrac{\partial p}{\partial x}=0 \textrm{ at } x=0,2
+\end{align}
+$$
+
+We use these boundary conditions to solve the discretized NS momentum and presurre Poisson equations  \ref{eqn:momentumx} - \ref{eqn:pressurepoisson}.
+
+
 ## References
 
 [^1]:Batchelor, G.K., 1967. An introduction to fluid dynamics. Cambridge university press.
