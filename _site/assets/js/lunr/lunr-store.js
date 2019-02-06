@@ -19,6 +19,11 @@ var store = [{
         "tags": [],
         "url": "http://localhost:4000/coursenotes/markhamsklearn/",
         "teaser":null},{
+        "title": "Miscellaneous notes: `python`, `numpy`, `pandas`, `sklearn`",
+        "excerpt":"python   numpy   pandas   sklearn  ","categories": [],
+        "tags": [],
+        "url": "http://localhost:4000/coursenotes/python_notes/",
+        "teaser":null},{
         "title": "Fundamentals of Statistics - 18.6501x",
         "excerpt":" ","categories": [],
         "tags": [],

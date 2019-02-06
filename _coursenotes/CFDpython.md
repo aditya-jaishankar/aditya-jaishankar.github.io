@@ -574,6 +574,122 @@ ax.set_ylabel('$y$');
 
 The intial pulse has been translated, sheared, and smeared, as expected by the different elements of the Burgers' equation. 
 
+## Some remarks on analyzing a numerical scheme
+
+There are primarily three properties that are used in the analysis of a numerical scheme: consistency, stability, and convergence. These are defined as below:
+
+### Defintions
+
+**Consistency**
+
+The numerical scheme must tend to the analytical differential equation as the the time and space steps tend to 0.
+
+**Stability**
+
+A conditon on the scheme (and not on the differential equation) that all errors must remain bounded as the scheme progresses for finite $\Delta x$, $\Delta t$, as the number of time steps $n \to \infty$. If the error of the discretized equation is given by $\bar{\epsilon}^n_i = u_i^n - \bar{u}_i^n$, where $u_i^n$ is the computed solution and $\bar{u}_i^n$ is the exact solution of the numerical scheme, then the scheme is stable if
+
+$$
+\begin{align}
+\lim_{n \to \infty} \lvert \bar{\epsilon} \rvert < K
+\end{align}
+$$
+
+for all fixed $\Delta t$ and $\Delta x$. 
+
+**Convergence**
+
+This is a condition on the numerical solution that states that the scheme is convergent if the discretized solution tends to the exact solution as $\Delta x$ and $\Delta t$ both tend to zero. That is, if $\tilde{\epsilon}_i^n = \tilde{u}_i^n - \tilde{u}_i^n$ is the error between the computed solution to the numerical scheme $u_i^n$ and the exact analytical solution $\tilde{u}_i^n$, then the scheme is convergent if
+
+$$
+\begin{align}
+\lim_{\Delta x_i \to 0} \lvert \tilde{\epsilon} \rvert = 0
+\end{align}
+$$
+
+In summary, consistency connects the discretized equation to the analytical differential equation, stability connects the numerical solution to the exact solution of the scheme, and convergence ensures that the numerical solution approaches the exact solution of the analytical differential equation.
+
+**The equivalence theorem of Lax**
+
+For a well-posed IVP and a consistent discretization scheme, stability is the necessary and sufficient condition for convergence.
+
+### Numerical diffusion
+
+Consider the discretized form of the wave equation shown in Equation \eqref{eqn:wave-equation-discrete}. It can be shown by writing out Taylor series expansions and some rearrangement that
+
+$$
+\begin{align}
+& \dfrac{u_i^{n+1} -u_i^n}{\Delta t} + \dfrac{c}{2\Delta x}(u_{i+1}^n -u_{i-1}^n) - \left(\dfrac{\partial u}{\partial t} +c \dfrac{\partial u}{\partial x}\right)_i^n = \\
+& \dfrac{\Delta t}{2}\left.\dfrac{\partial^2 u}{\partial t^2}\right|_i^n + \dfrac{c\Delta x^2}{6}\left.\dfrac{\partial^3 u}{\partial t^3}\right|_i^n + O(\Delta t^2, \Delta x^4) \label{eqn:trunc}
+\end{align}
+$$
+
+The term in the RHS is known as the truncation error $\epsilon_T$. Now consider an exact solution to the discretized equation $\bar{u}_i^n$. Then by defintion,
+
+$$
+\begin{align}
+\dfrac{\bar{u} _i^{n+1} - \bar{u} _i^n}{\Delta t} + \dfrac{c}{2\Delta x}(\bar{u} _{i+1}^n - \bar{u} _{i-1}^n) = 0
+\end{align}
+$$
+
+Using this result in the Equation \ref{eqn:trunc}, we have that
+
+$$
+\begin{align}
+& \left(\dfrac{\partial \bar{u}}{\partial t} +c \dfrac{\partial \bar{u}}{\partial x}\right)_i^n = \\
+& \dfrac{\Delta t}{2}\left.\dfrac{\partial^2 u}{\partial t^2}\right|_i^n + \dfrac{c\Delta x^2}{6}\left.\dfrac{\partial^3 u}{\partial t^3}\right|_i^n + O(\Delta t^2, \Delta x^4) \label{eqn:int}
+\end{align}
+$$
+
+Simplifying notation and rearranging, we get
+
+$$
+\begin{align}
+\left(\bar{u} _t\right)_i^n = -c\left(\bar{u} _x\right)_i^n + O(\Delta t, \Delta x^2) 
+\end{align}
+$$
+
+Differentiating the above equation with repect to time, and noting that the order of differentiation can be switched because of the well-behaved nature of $u$, we finally obtain
+
+$$
+\begin{align}
+\left(\bar{u} _tt\right)_i^n = c^2\left(\bar{u} _x\right)_i^n + O(\Delta t, \Delta x^2) 
+\end{align}
+$$
+
+Plugging this result back into Equation \ref{eqn:int} we obtain the *modified differential equation*
+
+$$
+\begin{align}
+\bar{u} _t + c\bar{u} _x = -\dfrac{\Delta t}{2} c^2 \bar{u} _{xx} + O(\Delta t^2, \Delta x^2)
+\end{align}
+$$
+
+The exact solution to the numerical scheme satisfies this equation. Note that we started with wave equation which only talks about pure convection, but using a numerical scheme introduced a diffusion term. This phenomenon is termed numerical diffusion. In this particular case, note that the diffusion coefficient is negative! So this diffusion term is unstable. By physical analogy, a negative diffusion coeffient corresponds to a negative viscosity, and small perturbations are amplified instead of dispersed, making the solution blow up. We will see more about looking at stable and unstable scheme while studying von Neumann stability analysis. 
+
+Below are the steps to determine the modified differential equation:
+
+0. Perform the consistency analysis and find the truncation error: $N(u_i^n) - D(u) = \epsilon_T$, where $D(u)$ is the mathematical model we wish to solve numerically and $N(u_i^n)$ is the numerical scheme we implement.
+
+0. Consider the exact solution of the numerical scheme $\bar{u} _i^n$ defined by $N(\bar{u} _i^n) = 0$, to obtain the differential equation $D(\bar{u} _i^n) = -\bar{\epsilon} _T$.
+
+0. Replace the lowest time derivative with a space derivative in $\bar{\epsilon} _T$ by taking suitable derivatives.
+
+0. The modified differential equation is defined as an equation obtained after the replacement in the step above, restricted to the lowest order terms (containing space derivatives only).
+
+### von Neumann stability analysis
+
+The central idea in the von Neumann stability analysis is to expand the solution (or error) in a finite Fourier series. Consider a 1D domain $(0,L)$ and reflect it into $(-L,0)$, and generate meshpoints each of length $\Delta x$. The smallest resolvable wavelength is $\lambda_\textrm{min} = 2\Delta x$ and the largest resolvable wavelength is $2L$. This implies $k_\textrm{min} = 2\pi/\lambda_{min} = \pi/L$ and hence $k_j = j k_\textrm{min} = j\pi/L = j\pi/(N\Delta x)$. Moreover, the phase angle $\phi_j = j\pi/N$. This covers the whole domain $[-\pi, \pi]$ in steps of $\pi/N$. The key step in the analysis is to decompose the solution as
+
+$$
+\begin{align}
+u_i^n = \sum\limits_{-N}^N V_j^n e^{I k_j x_i} = \sum\limits_{-N}^N V_j^n e^{I i j \pi/N} 
+\end{align}
+$$
+
+where $V_j^n$ is the amplitude of the $j$-th harmonic. 
+
+The stability criterion states that the amplitude of no harmonic grows indefinitely as $n \to \infty$. We define the amplification factor $G=\frac{V^{n+1}}{V^n}$. The stability criterion requires that $\lvert G \rvert \leq 1$ for all $\phi_j = j\pi/N, j \in [-N, N]$. We show a simple example below. 
+
 ## References
 
 [^1]:Batchelor, G.K., 1967. An introduction to fluid dynamics. Cambridge university press.
