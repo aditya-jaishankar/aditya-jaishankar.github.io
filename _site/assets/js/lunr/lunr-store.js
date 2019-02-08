@@ -4,6 +4,11 @@ var store = [{
         "tags": [],
         "url": "http://localhost:4000/coursenotes/probability/",
         "teaser":null},{
+        "title": "Google's Machine Learning Crash Course",
+        "excerpt":"Definitions and Framing Supervised Machine Learning: Using known data to generate some useful predictions of on unseen data Label $y$: The target variable that we are trying to predict, for example ‘spam’ or ‘not spam’. Features: Something about the data that is used to represent the data, that is later...","categories": [],
+        "tags": [],
+        "url": "http://localhost:4000/coursenotes/googlemachinelearning/",
+        "teaser":null},{
         "title": "Computational Fluid Dynamics Python (CFD) - Python",
         "excerpt":"Class notes for the CFD-Python course taught by Prof. Lorena Barba, Boston University. The course outlines a 12 step program, each of increasing difficulty, towards building mastery solving the Navier-Stokes equations through finite difference techniques. Preliminaries The Naiver-Stokes (N-S) equation represents the conservation of momentum of purely viscous, i.e. Newtonian...","categories": [],
         "tags": [],
