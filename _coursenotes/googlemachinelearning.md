@@ -317,11 +317,12 @@ We now need to define an input function which tells tensorflow how to preprocess
 def my_input_function(features, targets, batch_size=1, shuffle=True, num_epochs=None):
     """Trains a linear regression model with one feature
     Inputs: 
-        features: a pandas dataframe of features
-        targets: a pandas dataframe of targets
+        features:   a pandas dataframe of features
+        targets:    a pandas dataframe of targets
         batch_size: size of batches to be passed to the model
-        shuffle: Boolean, whether to shuffle the training data or not
-        num_epochs: number of epochs for which the data should be repeated. None means repeat indefinitely
+        shuffle:    Boolean, whether to shuffle the training data or not
+        num_epochs: number of epochs for which the data should be repeated. 
+                    None means repeat indefinitely
     Returns:
         Tuple of (features, label) for the next data batch
     """
