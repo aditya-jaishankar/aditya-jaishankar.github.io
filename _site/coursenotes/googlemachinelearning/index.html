@@ -348,7 +348,7 @@
 
 
 
-  4 minute read
+  6 minute read
 </p>
           
         </header>
@@ -363,6 +363,11 @@
   <li><a href="#definitions-and-framing">Definitions and Framing</a></li>
   <li><a href="#descending-into-ml">Descending into ML</a></li>
   <li><a href="#reducing-loss">Reducing Loss</a></li>
+  <li><a href="#first-steps-with-tensorflow">First steps with TensorFlow</a>
+    <ul>
+      <li><a href="#tfestimator-api">tf.estimator API</a></li>
+    </ul>
+  </li>
 </ul>
             </nav>
           </aside>
@@ -434,7 +439,7 @@ L_2 \textrm{ Loss } = \sum\limits_i (y_i - prediction_i(\mathbf{x}))^2
   <li>
     <p>There are two important flavors of gradient descent:</p>
 
-    <p>** Stochastic Gradient Descent:**</p>
+    <p><strong>Stochastic Gradient Descent:</strong></p>
 
     <p>In theory, while using gradient descent, we need to calculate the gradient of the loss function considering all examples. However in practice, this is found to be excessive and computationally expensive. We therefore select only one example at random and calculate the gradient of the loss function considering only that one example. This is called stochastic gradient descent. Although this might require more steps to reach the optimum, overall there is usually less computation when dealing with very large data sets. Gradient calculations can be very expensive.</p>
 
@@ -454,7 +459,7 @@ L_2 \textrm{ Loss } = \sum\limits_i (y_i - prediction_i(\mathbf{x}))^2
 
     <p>When there are multiple parameters to optimize, the gradient is of course a vector, and so is $\mathbf{w} = (w_1, w_2, \ldots)$ and we proceed in the direction of steepest gradient in steps $\eta$ large.</p>
 
-    <p>** Mini-batch Gradient Descent**</p>
+    <p><strong>Mini-batch Gradient Descent</strong></p>
 
     <p>This is very similar to stochastic gradient descent except that instead of taking only one data point, we take batches of 10 or 100 of them.  Especially with datasets that contain duplicates, enormous datasets do not contain any further information than very large datasets. Mini-batch gradient descent exploits this fact and works very well in practice. Typical values of batch-size range between 10 and 1000. Stochastic gradient descent is an extreme example of mini-batch gradient descent with batch size 1.</p>
   </li>
@@ -463,6 +468,166 @@ L_2 \textrm{ Loss } = \sum\limits_i (y_i - prediction_i(\mathbf{x}))^2
   </li>
 </ul>
 
+<h2 id="first-steps-with-tensorflow">First steps with TensorFlow</h2>
+
+<ul>
+  <li>
+    <p>TensnsorFlow is a computational framework that allows you to build machine learning models. We can use both lower level APIs by defining models based on a series of mathematical operations or we could use predefined higher level APIs such as <code class="highlighter-rouge">tf.estimator</code>. These architectures can be linear regressors or neural networks.</p>
+  </li>
+  <li>
+    <p>TensorFlow consists of the following two components:</p>
+
+    <ol>
+      <li>A graph protocol buffer</li>
+      <li>A runtime that executes the distributed graph</li>
+    </ol>
+  </li>
+  <li>
+    <p>The <strong>graph protocol buffer</strong> or protobuf takes data structures written in a text file and then generates classes in Python (or other language) that allows you to load, save and interact with the data in a user friendly way. In this sense the protobuf and the runtime are akin to Python code and a Python interpreter.</p>
+  </li>
+  <li>
+    <p>Because TensorFlow is built using APIs of various levels of abstraction, we have a choice of level. In general, I should chose the layer that offers the highest level of abstraction. Of course, the highest layers are also less flexible, so for some special modeling cases if I need more flexibility, I can just drop one run lower in the level of API.</p>
+  </li>
+</ul>
+
+<h3 id="tfestimator-api"><code class="highlighter-rouge">tf.estimator</code> API</h3>
+
+<ul>
+  <li>
+    <p>The <code class="highlighter-rouge">tf.estimator</code> API is one of the highest level APIs that has a lot of prepackaged tools of use. Below we show some code to exemplify its use. In the example below, we are going to estimate the median housing pricebased on just one input feature. The data is from the 1990 California housing census data. Available <a href="https://developers.google.com/machine-learning/crash-course/california-housing-data-description">here</a></p>
+
+    <p>First we perform some imports</p>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">cm</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">gridspec</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="n">tf</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---------------------------------------------------------------------------
+
+ModuleNotFoundError                       Traceback (most recent call last)
+
+&lt;ipython-input-2-719382ac702b&gt; in &lt;module&gt;
+      6 import pandas as pd
+      7 from sklearn import metrics
+----&gt; 8 import tensorflow as tf
+
+
+ModuleNotFoundError: No module named 'tensorflow'
+</code></pre></div></div>
+
+<p>We next load the data let us load the data</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">california_housing_dataframe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'https://download.mlcc.google.com/mledu-datasets/california_housing_train.csv'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">','</span><span class="p">)</span>
+
+<span class="n">california_housing_dataframe</span> <span class="o">=</span> <span class="n">california_housing_dataframe</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">california_housing_dataframe</span><span class="o">.</span><span class="n">index</span><span class="p">))</span>
+<span class="n">california_housing_dataframe</span><span class="p">[</span><span class="s">'median_house_value'</span><span class="p">]</span> <span class="o">/=</span> <span class="mi">1000</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">california_housing_dataframe</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>longitude</th>
+      <th>latitude</th>
+      <th>housing_median_age</th>
+      <th>total_rooms</th>
+      <th>total_bedrooms</th>
+      <th>population</th>
+      <th>households</th>
+      <th>median_income</th>
+      <th>median_house_value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>11838</th>
+      <td>-121.34</td>
+      <td>38.65</td>
+      <td>27.0</td>
+      <td>1595.0</td>
+      <td>246.0</td>
+      <td>610.0</td>
+      <td>253.0</td>
+      <td>4.6000</td>
+      <td>199.0</td>
+    </tr>
+    <tr>
+      <th>15723</th>
+      <td>-122.40</td>
+      <td>38.34</td>
+      <td>33.0</td>
+      <td>1408.0</td>
+      <td>273.0</td>
+      <td>520.0</td>
+      <td>212.0</td>
+      <td>3.5781</td>
+      <td>242.5</td>
+    </tr>
+    <tr>
+      <th>7910</th>
+      <td>-118.40</td>
+      <td>33.96</td>
+      <td>44.0</td>
+      <td>1877.0</td>
+      <td>314.0</td>
+      <td>877.0</td>
+      <td>320.0</td>
+      <td>6.8197</td>
+      <td>363.6</td>
+    </tr>
+    <tr>
+      <th>9977</th>
+      <td>-119.76</td>
+      <td>34.44</td>
+      <td>28.0</td>
+      <td>1985.0</td>
+      <td>582.0</td>
+      <td>1092.0</td>
+      <td>548.0</td>
+      <td>2.4701</td>
+      <td>290.9</td>
+    </tr>
+    <tr>
+      <th>1880</th>
+      <td>-117.28</td>
+      <td>34.06</td>
+      <td>2.0</td>
+      <td>1658.0</td>
+      <td>290.0</td>
+      <td>868.0</td>
+      <td>304.0</td>
+      <td>5.1365</td>
+      <td>136.7</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
         
       </section>

@@ -25,7 +25,7 @@ var store = [{
         "url": "http://localhost:4000/coursenotes/markhamsklearn/",
         "teaser":null},{
         "title": "Miscellaneous notes: `python`, `numpy`, `pandas`, `sklearn`",
-        "excerpt":"python   numpy   pandas   sklearn  ","categories": [],
+        "excerpt":"python numpy pandas pandas.DataFrame.reindex(labels) allows you to reorder the index of a dataframe to the order dictated by labels. If the corresponding label existed in the original dataframe, it will slot that particular row containing that index there. If that index does not exist, it will insert NaN unless the...","categories": [],
         "tags": [],
         "url": "http://localhost:4000/coursenotes/python_notes/",
         "teaser":null},{
@@ -39,7 +39,7 @@ var store = [{
         "tags": [],
         "url": "http://localhost:4000/edge-case-nested-and-mixed-lists/",
         "teaser":null},{
-        "title": "Testing to see if this works",
+        "title": "Testing",
         "excerpt":"This is testing the markdown content # Uses python3 def edit_distance(s, t): # I am going to make an m x n array i.e. m rows and n cols m = len(s) n = len(t) if m == 0: return n elif n == 0: return m # Initializing an...","categories": [],
         "tags": [],
         "url": "http://localhost:4000/testing/",
