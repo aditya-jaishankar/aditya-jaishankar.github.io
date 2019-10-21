@@ -3,7 +3,7 @@ title: "Coursework"
 categories:
 toc: true
 layout: single
-permalink: /coursework/
+permalink: /coursework_collected/
 author_profile: true
 toc: true
 ---

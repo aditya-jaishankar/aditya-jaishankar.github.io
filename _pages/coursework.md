@@ -12,21 +12,22 @@ Below is a list of online courses I have completed during my self-study program.
 * [Prof. David Silver's course on reinforcement learning](http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching.html)
 
 * [Machine Learning with Python - From Linear Models to Deep Learning](https://courses.edx.org/courses/course-v1:MITx+6.86x+1T2019/course/)
-  [Course Notes](/coursenotes/probability/){: .btn .btn--success .btn--default}
+  [Course Notes](/coursenotes/probability/){: .btn .btn--success .btn--default}[Completion certificate](https://courses.edx.org/certificates/38b75e63fdbd462cb46f87bef387e3b7){: .btn .btn--success .btn--default}
 
 * [Probability - The Science and Uncertainty of Data](https://courses.edx.org/courses/course-v1:MITx+6.431x+3T2018/course/)
-  [Course Notes](/coursenotes/probability/){: .btn .btn--success .btn--default}
+  [Course Notes](/coursenotes/probability/){: .btn .btn--success .btn--default}[Completion certificate](https://courses.edx.org/certificates/2b73f28fdbb8483f99b7bf992768aad7){: .btn .btn--success .btn--default}
 
 * [Fundamentals of Statistics](https://courses.edx.org/courses/course-v1:MITx+18.6501x+3T2018/course/)
-  [Course Notes](/coursenotes/statistics/){: .btn .btn--success .btn--default}
+  [Course Notes](/coursenotes/statistics/){: .btn .btn--success .btn--default}[Completion certificate](https://courses.edx.org/certificates/16b3eb442c9c458b9d2781fa4c4c3a5f){: .btn .btn--success .btn--default}
 
 * [Algorithmic Design and Techniques](https://courses.edx.org/courses/course-v1:UCSanDiegoX+ALGS200x+2T2017/course/)
-  [Course Notes](/coursenotes/algorithms/){: .btn .btn--success .btn--default}
+  [Course Notes](/coursenotes/algorithms/){: .btn .btn--success .btn--default}[Completion certificate](https://courses.edx.org/certificates/7b10d0489b9f44b3b6ebb4c4d45eaddd){: .btn .btn--success .btn--default}
 
 * [Computational Fluid Dynamics (CFD)-Python](http://lorenabarba.com/blog/cfd-python-12-steps-to-navier-stokes/) 
   [Course Notes](/coursenotes/CFDpython){: .btn .btn--success .btn--default}
 
 * [Python for Data Science](https://www.edx.org/course/python-data-science-uc-san-diegox-dse200x)
+  [Completion certificate](https://courses.edx.org/certificates/fef05b87cb70483895c0f00e93846942){: .btn .btn--success .btn--default}
 
 ## Textbooks consulted
 
