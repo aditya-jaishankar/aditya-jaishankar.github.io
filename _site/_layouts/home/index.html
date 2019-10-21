@@ -133,8 +133,6 @@
             </li><li class="masthead__menu-item">
               <a href="/projects/" >Projects</a>
             </li><li class="masthead__menu-item">
-              <a href="/year-archive/" >Blog</a>
-            </li><li class="masthead__menu-item">
               <a href="/research/" >Ph.D. Research</a>
             </li><li class="masthead__menu-item">
               <a href="/publications/" >Publications</a>
@@ -237,7 +235,7 @@
     
       
       
-        <li class="current">Google's Machine Learning Crash Course</li>
+        <li class="current">Google Machine Learning Crash Course</li>
       
     
   </ol>
@@ -375,15 +373,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Google’s Machine Learning Crash Course">
+    <meta itemprop="headline" content="Google Machine Learning Crash Course">
     
-    <meta itemprop="datePublished" content="February 01, 2019">
+    
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">Google’s Machine Learning Crash Course
+          <h1 id="page-title" class="page__title" itemprop="headline">Google Machine Learning Crash Course
 </h1>
           
             <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
@@ -391,7 +389,7 @@
 
 
 
-  6 minute read
+  21 minute read
 </p>
           
         </header>
@@ -409,6 +407,19 @@
   <li><a href="#first-steps-with-tensorflow">First steps with TensorFlow</a>
     <ul>
       <li><a href="#tfestimator-api">tf.estimator API</a></li>
+      <li><a href="#step-0-setup-imports-loading-and-inspecting-the-data">Step 0: Setup, imports, loading and inspecting the data</a></li>
+      <li><a href="#step-1-defining-the-features">Step 1: Defining the features</a></li>
+      <li><a href="#step-2-defining-the-target">Step 2: Defining the target</a></li>
+      <li><a href="#step-3-configure-the-linearregressor">Step 3: Configure the LinearRegressor</a></li>
+      <li><a href="#step-4-define-the-input-function">Step 4: Define the input function</a></li>
+      <li><a href="#step-5-train-the-model">Step 5: Train the model</a></li>
+      <li><a href="#evaluate-the-model">Evaluate the model</a></li>
+      <li><a href="#aside-synthetics-features-and-outliers">Aside: Synthetics features and outliers</a>
+        <ul>
+          <li><a href="#task-1-creating-my-own-synthetic-feature">Task 1: Creating my own synthetic feature</a></li>
+          <li><a href="#task-2-identify-outliers">Task 2: Identify outliers</a></li>
+        </ul>
+      </li>
     </ul>
   </li>
 </ul>
@@ -419,9 +430,8 @@
 
 <ul>
   <li>
-    <p><strong>Supervised Machine Learning:</strong></p>
-
-    <p>Using known data to generate some useful predictions of on unseen data</p>
+    <p><strong>Supervised Machine Learning:</strong> 
+  Using known data to generate some useful predictions of on unseen data</p>
 
     <p>Label $y$: The target variable that we are trying to predict, for example ‘spam’ or ‘not spam’.</p>
 
@@ -535,13 +545,29 @@ L_2 \textrm{ Loss } = \sum\limits_i (y_i - prediction_i(\mathbf{x}))^2
 
 <h3 id="tfestimator-api"><code class="highlighter-rouge">tf.estimator</code> API</h3>
 
-<ul>
-  <li>
-    <p>The <code class="highlighter-rouge">tf.estimator</code> API is one of the highest level APIs that has a lot of prepackaged tools of use. Below we show some code to exemplify its use. In the example below, we are going to estimate the median housing pricebased on just one input feature. The data is from the 1990 California housing census data. Available <a href="https://developers.google.com/machine-learning/crash-course/california-housing-data-description">here</a></p>
+<p>The <code class="highlighter-rouge">tf.estimator</code> API is one of the highest level APIs that has a lot of prepackaged tools of use. Below we show some code to exemplify its use. In the example below, we are going to estimate the median housing pricebased on just one input feature. The data is from the 1990 California housing census data. Available <a href="https://developers.google.com/machine-learning/crash-course/california-housing-data-description">here</a>. First we perform some imports:</p>
 
-    <p>First we perform some imports</p>
-  </li>
-</ul>
+<h3 id="step-0-setup-imports-loading-and-inspecting-the-data">Step 0: Setup, imports, loading and inspecting the data</h3>
+
+<p><strong>Note:</strong> <code class="highlighter-rouge">tensorflow</code> does not work with <code class="highlighter-rouge">python 3.7.x</code> yet. I had <code class="highlighter-rouge">python 3.7.2</code> loaded on my machine, so this was a good exercise in understanding <code class="highlighter-rouge">conda environments</code>. It is recommended that each project have ita own <em>environment</em>, which consists of a python ditribution (which can be versioned) and a series of packages (which can also be versioned). we first use</p>
+
+<p><code class="highlighter-rouge">conda env --name &lt;envname&gt;</code></p>
+
+<p><code class="highlighter-rouge">-n</code> can be used instead of <code class="highlighter-rouge">--name</code>. The environment can be created with all the required packages in one line as follows (recommended):</p>
+
+<p><code class="highlighter-rouge">conda env -n tensorflowenv python=3.6 scipy numpy matplotlib scikit-learn</code></p>
+
+<p>Here <code class="highlighter-rouge">tensorflowenv</code> is the environment name that I choose to give. I then go into the new environment using</p>
+
+<p><code class="highlighter-rouge">conda activate tensorflowenv</code></p>
+
+<p>Now <code class="highlighter-rouge">jupyter</code> doesn’t yet recognize this new kernel, so I need to manually go and install it (for each environment I create) using the following (see <a href="https://stackoverflow.com/questions/39604271/conda-environments-not-showing-up-in-jupyter-notebook?rq=1">here</a> for more details:)</p>
+
+<p><code class="highlighter-rouge">python -m ipykernel install --name tensorflowenv --display-name "Python (tendorflowenv)"</code></p>
+
+<p>Now when I invoke <code class="highlighter-rouge">jupyter notebook</code> in the activate environment, I can use the dropdown menu to activate the kernel with the specific python version and packages that I desire. Also note that invoking <code class="highlighter-rouge">conda install pkgname</code> in the activated environment only installs the <code class="highlighter-rouge">pkgname</code> for that particular environment.</p>
+
+<p>For more information regarding environments, see the <a href="https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">docs</a></p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">cm</span>
@@ -551,22 +577,14 @@ L_2 \textrm{ Loss } = \sum\limits_i (y_i - prediction_i(\mathbf{x}))^2
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
 <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="n">tf</span>
+
+<span class="kn">from</span> <span class="nn">tensorflow.python.data</span> <span class="kn">import</span> <span class="n">Dataset</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">logging</span><span class="o">.</span><span class="n">set_verbosity</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">max_rows</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s">'{:.1f}'</span><span class="o">.</span><span class="n">format</span>
 </code></pre></div></div>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---------------------------------------------------------------------------
-
-ModuleNotFoundError                       Traceback (most recent call last)
-
-&lt;ipython-input-2-719382ac702b&gt; in &lt;module&gt;
-      6 import pandas as pd
-      7 from sklearn import metrics
-----&gt; 8 import tensorflow as tf
-
-
-ModuleNotFoundError: No module named 'tensorflow'
-</code></pre></div></div>
-
-<p>We next load the data let us load the data</p>
+<p>We next load the data</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">california_housing_dataframe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'https://download.mlcc.google.com/mledu-datasets/california_housing_train.csv'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">','</span><span class="p">)</span>
 
@@ -609,68 +627,613 @@ ModuleNotFoundError: No module named 'tensorflow'
   </thead>
   <tbody>
     <tr>
-      <th>11838</th>
-      <td>-121.34</td>
-      <td>38.65</td>
-      <td>27.0</td>
-      <td>1595.0</td>
-      <td>246.0</td>
-      <td>610.0</td>
-      <td>253.0</td>
-      <td>4.6000</td>
-      <td>199.0</td>
-    </tr>
-    <tr>
-      <th>15723</th>
-      <td>-122.40</td>
-      <td>38.34</td>
-      <td>33.0</td>
-      <td>1408.0</td>
-      <td>273.0</td>
-      <td>520.0</td>
-      <td>212.0</td>
-      <td>3.5781</td>
-      <td>242.5</td>
-    </tr>
-    <tr>
-      <th>7910</th>
-      <td>-118.40</td>
-      <td>33.96</td>
-      <td>44.0</td>
-      <td>1877.0</td>
-      <td>314.0</td>
-      <td>877.0</td>
-      <td>320.0</td>
-      <td>6.8197</td>
-      <td>363.6</td>
-    </tr>
-    <tr>
-      <th>9977</th>
-      <td>-119.76</td>
-      <td>34.44</td>
+      <th>4689</th>
+      <td>-118.1</td>
+      <td>34.1</td>
       <td>28.0</td>
-      <td>1985.0</td>
-      <td>582.0</td>
-      <td>1092.0</td>
-      <td>548.0</td>
-      <td>2.4701</td>
-      <td>290.9</td>
+      <td>238.0</td>
+      <td>58.0</td>
+      <td>142.0</td>
+      <td>31.0</td>
+      <td>0.5</td>
+      <td>500.0</td>
     </tr>
     <tr>
-      <th>1880</th>
-      <td>-117.28</td>
-      <td>34.06</td>
-      <td>2.0</td>
-      <td>1658.0</td>
-      <td>290.0</td>
-      <td>868.0</td>
-      <td>304.0</td>
-      <td>5.1365</td>
-      <td>136.7</td>
+      <th>7444</th>
+      <td>-118.3</td>
+      <td>33.9</td>
+      <td>13.0</td>
+      <td>2887.0</td>
+      <td>853.0</td>
+      <td>2197.0</td>
+      <td>800.0</td>
+      <td>2.9</td>
+      <td>207.9</td>
+    </tr>
+    <tr>
+      <th>14389</th>
+      <td>-122.1</td>
+      <td>38.0</td>
+      <td>42.0</td>
+      <td>2225.0</td>
+      <td>367.0</td>
+      <td>864.0</td>
+      <td>381.0</td>
+      <td>4.1</td>
+      <td>172.4</td>
+    </tr>
+    <tr>
+      <th>9089</th>
+      <td>-119.0</td>
+      <td>36.1</td>
+      <td>20.0</td>
+      <td>1042.0</td>
+      <td>183.0</td>
+      <td>509.0</td>
+      <td>175.0</td>
+      <td>3.0</td>
+      <td>73.0</td>
+    </tr>
+    <tr>
+      <th>8388</th>
+      <td>-118.5</td>
+      <td>34.3</td>
+      <td>33.0</td>
+      <td>1549.0</td>
+      <td>264.0</td>
+      <td>881.0</td>
+      <td>289.0</td>
+      <td>5.1</td>
+      <td>222.9</td>
     </tr>
   </tbody>
 </table>
 </div>
+
+<p>We are now going to use <code class="highlighter-rouge">total_rooms</code> as an input feature to predict our target (or label) <code class="highlighter-rouge">median_house_value</code>.  Note that the data is at the city block level, so the feature represents the total number of rooms in the block. We are going to use the <code class="highlighter-rouge">tf.estimator</code> API to implement a linear regressor to model the data. The API already implements a lot of the low-level nuts and bolts of the regression (or in general, other models) so we can focus on the training, evaluating, and visualizing aspects of the process. The specific class we will use is the <code class="highlighter-rouge">tf.estimator.LinearRegressor</code> class.</p>
+
+<h3 id="step-1-defining-the-features">Step 1: Defining the features</h3>
+
+<p>There are two main classes of features:</p>
+
+<ul>
+  <li>
+    <p><strong>categorical:</strong> a feature that can take on discrete values, like spam/not spam, sunny/rainy/cloudy, etc.</p>
+  </li>
+  <li>
+    <p><strong>neumerical:</strong> a feature that can take on continuous or a large number of discrete values, like price, temperature, etc. It seems that these are features that we can do arithmetic on.</p>
+  </li>
+</ul>
+
+<p>In TensorFlow, we need to define what kind of feature we are working with. In our case, because we are working with <code class="highlighter-rouge">total_rooms</code> in this example, it is a numerical feature. This identification of the type of feature is done using <code class="highlighter-rouge">tf.feature_column</code> module, which has various functions built into it. See <a href="https://www.tensorflow.org/guide/feature_columns">here</a> for documentation. Feature columns only contain a description of the data and not the data itself</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">my_feature</span> <span class="o">=</span> <span class="n">california_housing_dataframe</span><span class="p">[[</span><span class="s">'total_rooms'</span><span class="p">]]</span>
+<span class="n">feature_columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">numeric_column</span><span class="p">(</span><span class="s">'total_rooms'</span><span class="p">)]</span>
+</code></pre></div></div>
+
+<h3 id="step-2-defining-the-target">Step 2: Defining the target</h3>
+
+<p>We want to predict the meadian house value given the number of rooms, so this is our target</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">targets</span> <span class="o">=</span> <span class="n">california_housing_dataframe</span><span class="p">[</span><span class="s">'median_house_value'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h3 id="step-3-configure-the-linearregressor">Step 3: Configure the LinearRegressor</h3>
+
+<p>We now configure a linear regression model using <code class="highlighter-rouge">LinearRegressor</code>. The optimization itself is carried out using a built-in implementation of mini-batch stochastic gradient descent. We also use the <code class="highlighter-rouge">tf.contrib.estimator.clip_gradients_by_norm</code> functions to impose a cut off on the step size so that the gradient descent doesn’t become unstable.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">my_optimizer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">GradientDescentOptimizer</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.0000001</span><span class="p">)</span>
+<span class="n">my_optimizer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">contrib</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">clip_gradients_by_norm</span><span class="p">(</span><span class="n">my_optimizer</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">linear_regressor</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">LinearRegressor</span><span class="p">(</span><span class="n">feature_columns</span><span class="o">=</span><span class="n">feature_columns</span><span class="p">,</span>
+                                                <span class="n">optimizer</span><span class="o">=</span><span class="n">my_optimizer</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="step-4-define-the-input-function">Step 4: Define the input function</h3>
+
+<p>We now need to define an input function which tells tensorflow how to preprocess the data as well as how to batch, shuffle, and repeat it during model training. This function is a bit of a jump from what we have seen so far, so we will explore it step by step.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">my_input_fn</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">num_epochs</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="s">"""Trains a linear regression model with one feature
+    Inputs: 
+        features: a pandas dataframe of features
+        targets: a pandas dataframe of targets
+        batch_size: size of batches to be passed to the model
+        shuffle: Boolean, whether to shuffle the training data or not
+        num_epochs: number of epochs for which the data should be repeated. None means repeat indefinitely
+    Returns:
+        Tuple of (features, label) for the next data batch
+    """</span>
+    <span class="c"># convert pandas data into a dict of numpy arrays</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">dict</span><span class="p">(</span><span class="n">features</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span> <span class="c"># line 13</span>
+    
+    <span class="c"># Construct a dataset and configure batching and repeating</span>
+    <span class="n">ds</span> <span class="o">=</span> <span class="n">Dataset</span><span class="o">.</span><span class="n">from_tensor_slices</span><span class="p">((</span><span class="n">features</span><span class="p">,</span><span class="n">targets</span><span class="p">))</span> <span class="c"># line 16</span>
+    <span class="n">ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="n">batch_size</span><span class="p">)</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">num_epochs</span><span class="p">)</span> <span class="c"># line 17</span>
+    
+    <span class="c"># Shuffle the data if needed</span>
+    <span class="k">if</span> <span class="n">shuffle</span><span class="p">:</span>
+        <span class="n">ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">buffer_size</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span> <span class="c"># line 21</span>
+        
+    <span class="c"># return the next batch of data</span>
+    <span class="n">features</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">make_one_shot_iterator</span><span class="p">()</span><span class="o">.</span><span class="n">get_next</span><span class="p">()</span> <span class="c"># line 24</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Here is an explanation by line number of the code above.</p>
+
+<ul>
+  <li>
+    <p><strong>line 13:</strong>
+  <code class="highlighter-rouge">features</code> is a pandas dictionary, and <code class="highlighter-rouge">dict(features)</code> converts it into a dictionary with the column name as key and all the values in the column as pandas series of values. Therefore, the items generates an iterator of type <code class="highlighter-rouge">(feature_name, values)</code>, which we use to generate our feature dictionary. <code class="highlighter-rouge">values</code> is of type <code class="highlighter-rouge">pandas.Series</code>.</p>
+  </li>
+  <li>
+    <p><strong>lines 16:</strong></p>
+
+    <p>This line makes use of the <code class="highlighter-rouge">tf.data</code> API, which lets you take in distributed data from various sources and transform it in different ways to generate datasets for machine learning models. There are two cheif abstractions that <code class="highlighter-rouge">tf.data</code> introduces, one of which is the <code class="highlighter-rouge">tf.data.Dataset</code> module (the other is the <code class="highlighter-rouge">tf.data.Iterator</code> module which is used in line 24 and discussed next). Using <code class="highlighter-rouge">tf.data.Dataset</code>, there are two distinct ways to create a dataset:</p>
+
+    <ol>
+      <li>Creating a source (for example <code class="highlighter-rouge">Dataset.from_tensor_slices()</code>) which constructs a dataset from one or more <code class="highlighter-rouge">tf.Tensor</code> objects.</li>
+      <li>Applying a transformations (for example <code class="highlighter-rouge">Dataset.batch()</code>) which constructs a dataset from one or more <code class="highlighter-rouge">tf.data.Datasets</code> objects.</li>
+    </ol>
+
+    <p>A tensor object is in principle a matrix of n-dimensions, except that its value is not evaluated until called for using a <code class="highlighter-rouge">tf.run()</code> command. The objects can be passed into operations to yield other tensor objects, but again, actual evaluation of the numerical value of the tensor is held off until later. This enables the <em>flow</em> of a tensor through various operations without numerical evaluation. With this context, what line 16 is doing is the following:</p>
+
+    <p><code class="highlighter-rouge">Dataset.from_tensor_slices()</code> returns a dataset for each row of the input tensor. For example the code snippet below would return <code class="highlighter-rouge">[1, 2], [3, 4]</code> for the variable <code class="highlighter-rouge">ds</code>. In our case, we provide a tuple of the form <code class="highlighter-rouge">(features, targets)</code>, where <code class="highlighter-rouge">features</code> is a dictionary, and <code class="highlighter-rouge">targets</code> is a number, <code class="highlighter-rouge">from_tensor_slices</code> would essentially unpack this tuple, to provide multiple datasets, each of the form <code class="highlighter-rouge">({key: values}, target)</code>. In other words, for this dataset, if I were to print the Dataset object (with an appropriate <code class="highlighter-rouge">tf.Session.run()</code> call) I would see something like <code class="highlighter-rouge">({lattitide: -118, longitude: 30, ... , households: 600, ...}, &lt;median_house_value&gt;)</code>. It takes a row, converts it into a dictionary of the form <code class="highlighter-rouge">{column name: value}</code> an then constructs a iteratable and transformable <code class="highlighter-rouge">tf.Dataset</code> object which has a dictionary of features associated with the <code class="highlighter-rouge">target</code>. The code snippet in the next cell below should make things clear regarding the output format of the <code class="highlighter-rouge">tf.Dataset</code> call in this case.</p>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">t</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+    <span class="n">ds</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_tensor_slices</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>   <span class="c"># [1, 2], [3, 4]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">df_test</span><span class="p">[</span><span class="s">'col1'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">df_test</span><span class="p">[</span><span class="s">'col2'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">dict</span><span class="p">(</span><span class="n">df_test</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">ds_test</span> <span class="o">=</span> <span class="n">Dataset</span><span class="o">.</span><span class="n">from_tensor_slices</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">))</span>
+<span class="n">tensor_test</span> <span class="o">=</span> <span class="n">ds_test</span><span class="o">.</span><span class="n">make_one_shot_iterator</span><span class="p">()</span><span class="o">.</span><span class="n">get_next</span><span class="p">()</span>
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">tensor_test</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">tensor_test</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'col1': 0    0
+1    1
+Name: col1, dtype: int64, 'col2': 0    2
+1    3
+Name: col2, dtype: int64}
+({'col1': 0, 'col2': 2}, 100)
+({'col1': 1, 'col2': 3}, 200)
+</code></pre></div></div>
+
+<h3 id="step-5-train-the-model">Step 5: Train the model</h3>
+
+<p>We now call <code class="highlighter-rouge">train()</code> on <code class="highlighter-rouge">linear_regressor</code> to train the model.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">_</span> <span class="o">=</span> <span class="n">linear_regressor</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
+    <span class="n">input_fn</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">my_input_fn</span><span class="p">(</span><span class="n">my_feature</span><span class="p">,</span> <span class="n">targets</span><span class="p">),</span>
+    <span class="n">steps</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The use of the <code class="highlighter-rouge">lambda</code> function is somewhat unclear to me. It seems that it ensures that the input function is truly randomized? Or that datasets are correctly paired to models?</p>
+
+<h3 id="evaluate-the-model">Evaluate the model</h3>
+
+<p>We now just make predictions on the training data to see how well the model fit it during training.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Create an input function for predictions</span>
+<span class="n">prediction_input_fn</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">my_input_fn</span><span class="p">(</span><span class="n">my_feature</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">num_epochs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="c"># Call predict on the linear_regressor to make predictions</span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">linear_regressor</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">input_fn</span><span class="o">=</span><span class="n">prediction_input_fn</span><span class="p">)</span>
+
+<span class="c">#Format predictions as a numpy array so we can calculate error metrics</span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">item</span><span class="p">[</span><span class="s">'predictions'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">predictions</span><span class="p">])</span>
+
+<span class="c">#Calculate the mean squared error and the root mean squared error</span>
+<span class="n">mean_squared_error</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">targets</span><span class="p">)</span>
+<span class="n">root_mean_squared_error</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"Mean Squared Error (on training data): </span><span class="si">%0.3</span><span class="s">f"</span> <span class="o">%</span> <span class="n">mean_squared_error</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"Root Mean Squared Error (on training data): </span><span class="si">%0.3</span><span class="s">f"</span> <span class="o">%</span> <span class="n">root_mean_squared_error</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Mean Squared Error (on training data): 56367.025
+Root Mean Squared Error (on training data): 237.417
+</code></pre></div></div>
+
+<p>To know if this mse and rmse is any good, we compare the rmse to the difference between the min and max of our targets</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">min_house_value</span> <span class="o">=</span> <span class="n">california_housing_dataframe</span><span class="p">[</span><span class="s">"median_house_value"</span><span class="p">]</span><span class="o">.</span><span class="nb">min</span><span class="p">()</span>
+<span class="n">max_house_value</span> <span class="o">=</span> <span class="n">california_housing_dataframe</span><span class="p">[</span><span class="s">"median_house_value"</span><span class="p">]</span><span class="o">.</span><span class="nb">max</span><span class="p">()</span>
+<span class="n">min_max_difference</span> <span class="o">=</span> <span class="n">max_house_value</span> <span class="o">-</span> <span class="n">min_house_value</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">"Min. Median House Value: </span><span class="si">%0.3</span><span class="s">f"</span> <span class="o">%</span> <span class="n">min_house_value</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"Max. Median House Value: </span><span class="si">%0.3</span><span class="s">f"</span> <span class="o">%</span> <span class="n">max_house_value</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"Difference between Min. and Max.: </span><span class="si">%0.3</span><span class="s">f"</span> <span class="o">%</span> <span class="n">min_max_difference</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"Root Mean Squared Error: </span><span class="si">%0.3</span><span class="s">f"</span> <span class="o">%</span> <span class="n">root_mean_squared_error</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Min. Median House Value: 14.999
+Max. Median House Value: 500.001
+Difference between Min. and Max.: 485.002
+Root Mean Squared Error: 237.417
+</code></pre></div></div>
+
+<p>This seems really large - the rmse is nearly 50% of the max difference. Let us first look at some summary statistics on how well the model is doing.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">calibration_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">calibration_data</span><span class="p">[</span><span class="s">'predictions'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">predictions</span><span class="p">)</span>
+<span class="n">calibration_data</span><span class="p">[</span><span class="s">'targets'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">targets</span><span class="p">)</span>
+<span class="n">calibration_data</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>predictions</th>
+      <th>targets</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>17000.0</td>
+      <td>17000.0</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>0.1</td>
+      <td>207.3</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.1</td>
+      <td>116.0</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.0</td>
+      <td>15.0</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>0.1</td>
+      <td>119.4</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>0.1</td>
+      <td>180.4</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>0.2</td>
+      <td>265.0</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>1.9</td>
+      <td>500.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Plotting the data</span>
+
+<span class="n">sample</span> <span class="o">=</span> <span class="n">california_housing_dataframe</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+
+<span class="c"># Get the min and max total_rooms values.</span>
+<span class="n">x_0</span> <span class="o">=</span> <span class="n">sample</span><span class="p">[</span><span class="s">"total_rooms"</span><span class="p">]</span><span class="o">.</span><span class="nb">min</span><span class="p">()</span>
+<span class="n">x_1</span> <span class="o">=</span> <span class="n">sample</span><span class="p">[</span><span class="s">"total_rooms"</span><span class="p">]</span><span class="o">.</span><span class="nb">max</span><span class="p">()</span>
+
+<span class="c"># Retrieve the final weight and bias generated during training.</span>
+<span class="n">weight</span> <span class="o">=</span> <span class="n">linear_regressor</span><span class="o">.</span><span class="n">get_variable_value</span><span class="p">(</span><span class="s">'linear/linear_model/total_rooms/weights'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">bias</span> <span class="o">=</span> <span class="n">linear_regressor</span><span class="o">.</span><span class="n">get_variable_value</span><span class="p">(</span><span class="s">'linear/linear_model/bias_weights'</span><span class="p">)</span>
+
+<span class="c"># Get the predicted median_house_values for the min and max total_rooms values.</span>
+<span class="n">y_0</span> <span class="o">=</span> <span class="n">weight</span> <span class="o">*</span> <span class="n">x_0</span> <span class="o">+</span> <span class="n">bias</span> 
+<span class="n">y_1</span> <span class="o">=</span> <span class="n">weight</span> <span class="o">*</span> <span class="n">x_1</span> <span class="o">+</span> <span class="n">bias</span>
+
+<span class="c"># Plot our regression line from (x_0, y_0) to (x_1, y_1).</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x_0</span><span class="p">,</span> <span class="n">x_1</span><span class="p">],</span> <span class="p">[</span><span class="n">y_0</span><span class="p">,</span> <span class="n">y_1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s">'r'</span><span class="p">)</span> <span class="c"># Plotting the line using just 2 points</span>
+
+<span class="c"># Label the graph axes.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">"median_house_value"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">"total_rooms"</span><span class="p">)</span>
+
+<span class="c"># Plot a scatter plot from our data sample.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="s">"total_rooms"</span><span class="p">],</span> <span class="n">sample</span><span class="p">[</span><span class="s">"median_house_value"</span><span class="p">])</span>
+
+<span class="c"># Display graph.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/coursenotes/GoogleML/output_27_0.png" alt="png" width="75%" class="align-center" /></p>
+
+<p>The rest of the exercise goes into a discussion on tweaking the hyperparameters to overcome this por fit. With a suitable choice of <code class="highlighter-rouge">learning_rate</code>, <code class="highlighter-rouge">steps</code> and <code class="highlighter-rouge">batch_size</code> we can get a reasonably good fit. The parameter <code class="highlighter-rouge">steps</code> is just the number of times the mini-batch gradient descent attempts to go towards the minimum, and <code class="highlighter-rouge">batch_size</code> is the number of data points the gradient descent optimizer is optimizing over per step, so <code class="highlighter-rouge">steps * batch_size</code> is just the total number of data points involved in the optimization (not necessary all unique because the data points are randomly sampled)</p>
+
+<h3 id="aside-synthetics-features-and-outliers">Aside: Synthetics features and outliers</h3>
+
+<p>In this set of tasks, we are going to create a synthetic feature that is the ratio of two other features and we are going to use this new feature to train the linear regression model. We are also going to look at how we can remove outliers to improve the effectiveness of the model. We are going to use the same <code class="highlighter-rouge">my_input_fn</code> defined above to generate datasets. However let us define a new function <code class="highlighter-rouge">train_model</code> to train the model</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">train_model</span><span class="p">(</span><span class="n">learning_rate</span><span class="p">,</span> <span class="n">steps</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">input_feature</span><span class="p">):</span>
+    <span class="s">"""
+    Args:
+        learning_rate: A `float`, the learning rate.
+        steps: A non-zero `int`, the total number of training steps. A training step
+               consists of a forward and backward pass using a single batch.
+        batch_size: A non-zero `int`, the batch size.
+        input_feature: A `string` specifying a column from `california_housing_dataframe`
+                       to use as input feature.
+      
+    Returns:
+        A Pandas `DataFrame` containing targets and the corresponding predictions done
+        after training the model.
+  """</span>
+    <span class="n">periods</span> <span class="o">=</span> <span class="mi">10</span> <span class="c"># line 15</span>
+    <span class="n">steps_per_period</span> <span class="o">=</span> <span class="n">steps</span> <span class="o">/</span> <span class="n">periods</span>
+    
+    <span class="n">my_feature</span> <span class="o">=</span> <span class="n">input_feature</span>
+    <span class="n">my_feature_data</span> <span class="o">=</span> <span class="n">california_housing_dataframe</span><span class="p">[[</span><span class="n">my_feature</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s">'float32'</span><span class="p">)</span>
+    <span class="n">my_label</span> <span class="o">=</span> <span class="s">'median_house_value'</span>
+    <span class="n">targets</span> <span class="o">=</span> <span class="n">california_housing_dataframe</span><span class="p">[</span><span class="n">my_label</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s">'float32'</span><span class="p">)</span>
+    
+    <span class="c"># Create input functions</span>
+    <span class="n">training_input_fn</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">my_input_fn</span><span class="p">(</span><span class="n">my_feature_data</span><span class="p">,</span>
+                                            <span class="n">targets</span><span class="p">,</span>
+                                            <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+                                            <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                                            <span class="n">num_epochs</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+    <span class="n">predict_training_input_fn</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">my_input_fn</span><span class="p">(</span><span class="n">my_feature_data</span><span class="p">,</span> <span class="c"># line 29</span>
+                                                   <span class="n">targets</span><span class="p">,</span>
+                                                   <span class="n">batch_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                                                   <span class="n">shuffle</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                                                   <span class="n">num_epochs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="c"># Create feature columns</span>
+    <span class="n">feature_columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">numeric_column</span><span class="p">(</span><span class="n">my_feature</span><span class="p">)]</span> <span class="c"># line36</span>
+    
+    <span class="c"># Create a LinearRegressor object</span>
+    <span class="n">my_optimizer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">GradientDescentOptimizer</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span>
+    <span class="n">my_optimizer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">contrib</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">clip_gradients_by_norm</span><span class="p">(</span><span class="n">my_optimizer</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="n">linear_regressor</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">LinearRegressor</span><span class="p">(</span><span class="n">feature_columns</span><span class="o">=</span><span class="n">feature_columns</span><span class="p">,</span>
+                                                   <span class="n">optimizer</span><span class="o">=</span><span class="n">my_optimizer</span><span class="p">)</span>
+    
+    <span class="c"># Plotting commands to plot our model's fit after each period</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">"Learned Line by Period"</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">my_label</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">my_feature</span><span class="p">)</span>
+    <span class="n">sample</span> <span class="o">=</span> <span class="n">california_housing_dataframe</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="n">my_feature</span><span class="p">],</span> <span class="n">sample</span><span class="p">[</span><span class="n">my_label</span><span class="p">])</span>
+    <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="n">cm</span><span class="o">.</span><span class="n">coolwarm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">periods</span><span class="p">)]</span>
+    
+    <span class="c"># We now train the model inside a loop so that we can periodically</span>
+    <span class="c"># assess loss metrics</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Training model..."</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"RMSE (on training data):"</span><span class="p">)</span>
+    <span class="n">root_mean_squared_errors</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">period</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">periods</span><span class="p">):</span>
+        <span class="n">linear_regressor</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">input_fn</span><span class="o">=</span><span class="n">training_input_fn</span><span class="p">,</span>
+                              <span class="n">steps</span><span class="o">=</span><span class="n">steps_per_period</span><span class="p">)</span>
+        <span class="c"># Compute predictions</span>
+        <span class="n">predictions</span> <span class="o">=</span> <span class="n">linear_regressor</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">input_fn</span><span class="o">=</span><span class="n">predict_training_input_fn</span><span class="p">)</span>
+        <span class="n">predictions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">item</span><span class="p">[</span><span class="s">'predictions'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">predictions</span><span class="p">])</span> <span class="c"># line 64</span>
+        
+        <span class="c"># Compute mean squared error</span>
+        <span class="n">root_mean_squared_error</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">targets</span><span class="p">))</span>
+        
+        <span class="c"># Add the loss metrics from this period to our list.</span>
+        <span class="n">root_mean_squared_errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">root_mean_squared_error</span><span class="p">)</span>
+        
+        <span class="c"># Occasionally print the current loss.</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"  period </span><span class="si">%02</span><span class="s">d : </span><span class="si">%0.2</span><span class="s">f"</span> <span class="o">%</span> <span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">root_mean_squared_error</span><span class="p">))</span>
+        
+        <span class="c"># Finally, track the weights and biases over time.</span>
+        
+        <span class="c"># Apply some math to ensure that the data and line are plotted neatly.</span>
+        <span class="n">y_extents</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">sample</span><span class="p">[</span><span class="n">my_label</span><span class="p">]</span><span class="o">.</span><span class="nb">max</span><span class="p">()])</span>
+        
+        <span class="n">weight</span> <span class="o">=</span> <span class="n">linear_regressor</span><span class="o">.</span><span class="n">get_variable_value</span><span class="p">(</span><span class="s">'linear/linear_model/</span><span class="si">%</span><span class="s">s/weights'</span> <span class="o">%</span> <span class="n">input_feature</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="c"># line 76</span>
+        <span class="n">bias</span> <span class="o">=</span> <span class="n">linear_regressor</span><span class="o">.</span><span class="n">get_variable_value</span><span class="p">(</span><span class="s">'linear/linear_model/bias_weights'</span><span class="p">)</span> <span class="c"># line 77</span>
+    
+        <span class="n">x_extents</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_extents</span> <span class="o">-</span> <span class="n">bias</span><span class="p">)</span> <span class="o">/</span> <span class="n">weight</span>
+        <span class="n">x_extents</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">x_extents</span><span class="p">,</span>
+                                          <span class="n">sample</span><span class="p">[</span><span class="n">my_feature</span><span class="p">]</span><span class="o">.</span><span class="nb">max</span><span class="p">()),</span>
+                               <span class="n">sample</span><span class="p">[</span><span class="n">my_feature</span><span class="p">]</span><span class="o">.</span><span class="nb">min</span><span class="p">())</span>
+        <span class="n">y_extents</span> <span class="o">=</span> <span class="n">weight</span> <span class="o">*</span> <span class="n">x_extents</span> <span class="o">+</span> <span class="n">bias</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_extents</span><span class="p">,</span> <span class="n">y_extents</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">period</span><span class="p">])</span> 
+    <span class="k">print</span><span class="p">(</span><span class="s">"Model training finished."</span><span class="p">)</span>
+    
+    <span class="c"># Output a graph of loss metrics over periods.</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'RMSE'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'Periods'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">"Root Mean Squared Error vs. Periods"</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">root_mean_squared_errors</span><span class="p">)</span>
+
+    <span class="c"># Create a table with calibration data.</span>
+    <span class="n">calibration_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+    <span class="n">calibration_data</span><span class="p">[</span><span class="s">"predictions"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">predictions</span><span class="p">)</span>
+    <span class="n">calibration_data</span><span class="p">[</span><span class="s">"targets"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">targets</span><span class="p">)</span>
+    <span class="n">calibration_data</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s">"Final RMSE (on training data): </span><span class="si">%0.2</span><span class="s">f"</span> <span class="o">%</span> <span class="n">root_mean_squared_error</span><span class="p">)</span>
+  
+    <span class="k">return</span> <span class="n">calibration_data</span>
+</code></pre></div></div>
+
+<p>Again, we study all the lines that introduce something new.</p>
+
+<ul>
+  <li>
+    <p><strong>line 29:</strong></p>
+
+    <p>Here, we define a <code class="highlighter-rouge">predict_training_input_fn</code>. This is used when we call <code class="highlighter-rouge">linear_regressor.predict()</code> later, which needs an <code class="highlighter-rouge">input_fn</code> of its own. This is because we need a function that constructs the features that is fed into the <code class="highlighter-rouge">linear_regressor.predict()</code> in order to generate a prediction for the label. The <code class="highlighter-rouge">LinearRegressor</code> object is of course blind to the targets, and makes a prediction based on the outcome of the training phase. Therefore, the output of the <code class="highlighter-rouge">predict_training_input_fn</code> has to be a <code class="highlighter-rouge">tf.data.Dataset</code> object. However, this function is different from <code class="highlighter-rouge">training_input_function</code> in a few ways.</p>
+
+    <ol>
+      <li><code class="highlighter-rouge">batch_size=1</code> because I create a prediction of a set of features one at a time</li>
+      <li><code class="highlighter-rouge">shuffle=False</code>because there is no need toa shuffle a batch of size 1.</li>
+      <li><code class="highlighter-rouge">num_epochs=1</code> is important. <code class="highlighter-rouge">tf.data.Dataset.repeat(count)</code> will throw an out of range error (<code class="highlighter-rouge">tf.errors.OutOfRangeError</code>) when the number of times the dataset is repeated exceeds <code class="highlighter-rouge">count</code>. In our case, <code class="highlighter-rouge">num_epochs</code> is used in place of count. <code class="highlighter-rouge">tf.LinearRegressor.predict()</code> continues to predict until an out of range error is thrown. So in the prediction case, we use this to ensure that the prediction is made 1 set of features at a time.</li>
+    </ol>
+  </li>
+  <li>
+    <p><strong>line 36:</strong></p>
+
+    <p>Defining a feature column which is like a bridge, or intermediary between raw data and estimators. It transforms input data into formats that estimators can understand, giving a lot of richness to have input data speak with estimators. See the <a href="https://www.tensorflow.org/guide/feature_columns">docs</a> for the different kind of feature columns, of which <code class="highlighter-rouge">numeric_column</code> is one.</p>
+  </li>
+  <li>
+    <p><strong>line 64:</strong></p>
+
+    <p>Some thoughts on <code class="highlighter-rouge">linear_regressor.predict()</code>. The output of this function returns a generator which iterators over dictionaries. Each dictionary is of the form, for example, <code class="highlighter-rouge">{'predictions': array([15.93631], dtype=float32)}</code>. For each row of the form <code class="highlighter-rouge">(features, label)</code>, there is an entry in the generator object.</p>
+  </li>
+  <li>
+    <p><strong>line 66, 67:</strong></p>
+
+    <p><code class="highlighter-rouge">tf.estimator.get_variable_names()</code> gives me the names of the variables in the <code class="highlighter-rouge">tf.estimator</code> object. In this case, our estimator happens to be a <code class="highlighter-rouge">LinearRegressor</code> object. For example, calling <code class="highlighter-rouge">linear_regressor.get_variable_names()</code> outputs:</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ['global_step',
+   'linear/linear_model/bias_weights',
+   'linear/linear_model/total_rooms/weights']
+</code></pre></div>    </div>
+
+    <p>We can now get the values of these variables by calling the <code class="highlighter-rouge">get_variable_value(name)</code> method where <code class="highlighter-rouge">name</code> is one of the names returned by <code class="highlighter-rouge">get_variabale_names()</code>. For example,</p>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">linear_regressor</span><span class="o">.</span><span class="n">get_variable_value</span><span class="p">(</span><span class="s">'linear/linear_model/{}/</span><span class="err">
+</span><span class="s">                                      weights'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s">'total_rooms'</span><span class="p">))</span>
+</code></pre></div>    </div>
+    <p>returns <code class="highlighter-rouge">array([[4.999998e-05]], dtype=float32)</code> as the output.</p>
+  </li>
+</ul>
+
+<h4 id="task-1-creating-my-own-synthetic-feature">Task 1: Creating my own synthetic feature</h4>
+
+<p>The idea here is that <code class="highlighter-rouge">total_rooms</code> and <code class="highlighter-rouge">population</code> are both reported on a per city block basis. But some city blocks might have a lot of people for the same number of rooms, so the number of rooms per person is in a sense a better indicator of house value. So perhaps that would make a better feature.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">california_housing_dataframe</span><span class="p">[</span><span class="s">"rooms_per_person"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">california_housing_dataframe</span><span class="p">[</span><span class="s">'total_rooms'</span><span class="p">]</span> <span class="o">/</span> 
+                                                   <span class="n">california_housing_dataframe</span><span class="p">[</span><span class="s">'population'</span><span class="p">])</span>
+
+<span class="n">calibration_data</span> <span class="o">=</span> <span class="n">train_model</span><span class="p">(</span>
+    <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+    <span class="n">steps</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">input_feature</span><span class="o">=</span><span class="s">"rooms_per_person"</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Training model...
+RMSE (on training data):
+  period 00 : 212.73
+  period 01 : 189.62
+  period 02 : 171.05
+  period 03 : 153.35
+  period 04 : 141.30
+  period 05 : 135.36
+  period 06 : 131.91
+  period 07 : 130.58
+  period 08 : 130.18
+  period 09 : 130.61
+Model training finished.
+Final RMSE (on training data): 130.61
+</code></pre></div></div>
+
+<p><img src="/assets/images/coursenotes/GoogleML/output_33_1.png" alt="png" width="100%" class="align-center" /></p>
+
+<h4 id="task-2-identify-outliers">Task 2: Identify outliers</h4>
+
+<p>When we plot the predictions against the actual <code class="highlighter-rouge">median_house_value</code>, ideally we should see a straight line with slope 1. Do we really see that, and does that help us identify outliers?</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">calibration_data</span><span class="p">[</span><span class="s">'targets'</span><span class="p">],</span> <span class="n">calibration_data</span><span class="p">[</span><span class="s">'predictions'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;matplotlib.collections.PathCollection at 0x1a3a855cc0&gt;
+</code></pre></div></div>
+
+<p><img src="/assets/images/coursenotes/GoogleML/output_35_1.png" alt="png" width="75%" class="align-center" /></p>
+
+<p>A histogram might help to see how the data is distributed</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">california_housing_dataframe</span><span class="p">[</span><span class="s">'rooms_per_person'</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a3a8324a8&gt;
+</code></pre></div></div>
+
+<p><img src="/assets/images/coursenotes/GoogleML/output_37_1.png" alt="png" width="75%" class="align-center" /></p>
+
+<p>It looks like there are some small set of data points for <code class="highlighter-rouge">rooms_per_person</code> that is very large and might be throwing off the fit, so we will clip those</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">criterion</span> <span class="o">=</span> <span class="n">california_housing_dataframe</span><span class="p">[</span><span class="s">'rooms_per_person'</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">4</span>
+<span class="n">california_housing_dataframe</span> <span class="o">=</span> <span class="n">california_housing_dataframe</span><span class="p">[</span><span class="n">criterion</span><span class="p">]</span>
+<span class="n">california_housing_dataframe</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="s">'rooms_per_person'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[&lt;matplotlib.axes._subplots.AxesSubplot object at 0x1a3ce3d320&gt;]],
+      dtype=object)
+</code></pre></div></div>
+
+<p><img src="/assets/images/coursenotes/GoogleML/output_39_1.png" alt="png" width="75%" class="align-center" /></p>
+
+<p>This looks much more reasonable. We now follow the fitting procedure defined above by calling <code class="highlighter-rouge">train_model</code></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">calibration_data</span> <span class="o">=</span> <span class="n">train_model</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+    <span class="n">steps</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">input_feature</span><span class="o">=</span><span class="s">"rooms_per_person"</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Training model...
+RMSE (on training data):
+  period 00 : 213.27
+  period 01 : 189.60
+  period 02 : 167.16
+  period 03 : 147.02
+  period 04 : 130.93
+  period 05 : 118.40
+  period 06 : 111.94
+  period 07 : 109.36
+  period 08 : 107.38
+  period 09 : 105.99
+Model training finished.
+Final RMSE (on training data): 105.99
+</code></pre></div></div>
+
+<p><img src="/assets/images/coursenotes/GoogleML/output_41_1.png" alt="png" width="100%" class="align-center" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Replot the historgram and the parity plot to see if the plot looks any better now</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">california_housing_dataframe</span><span class="p">[</span><span class="s">'rooms_per_person'</span><span class="p">])</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">calibration_data</span><span class="p">[</span><span class="s">'targets'</span><span class="p">],</span> <span class="n">calibration_data</span><span class="p">[</span><span class="s">'predictions'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;matplotlib.collections.PathCollection at 0x1a3fcfad68&gt;
+</code></pre></div></div>
+
+<p><img src="/assets/images/coursenotes/GoogleML/output_42_1.png" alt="png" width="100%" class="align-center" /></p>
+
 
         
       </section>
@@ -680,8 +1243,6 @@ ModuleNotFoundError: No module named 'tensorflow'
         
 
 
-        
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-02-01T00:00:00-05:00">February 01, 2019</time></p>
         
       </footer>
 

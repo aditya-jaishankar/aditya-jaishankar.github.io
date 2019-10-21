@@ -6,8 +6,6 @@ main:
     url: /coursework/
   - title: "Projects"
     url: /projects/
-  - title: "Blog"
-    url: /year-archive/
   - title: "Ph.D. Research"
     url: /research/
   - title: "Publications"
