@@ -135,7 +135,7 @@ author:
       url: "https://www.linkedin.com/in/adityajaishankar"
     - label: "Resume"
       icon: "fas fa-file-alt"
-      url: "https://dspace.mit.edu/handle/1721.1/92159"
+      url: "/assets/misc/Resume_Jaishankar_191020.pdf"
 # sidebar:
 #   - title: "Sample block"
 #     text: "Physicist" 

@@ -1,0 +1,611 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Molecular solubility from polar charge density images: utils file | Aditya Jaishankar</title>
+<meta name="description" content="This is an excerpt">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Aditya Jaishankar">
+<meta property="og:title" content="Molecular solubility from polar charge density images: utils file">
+<meta property="og:url" content="http://localhost:4000/projects/utils/">
+
+
+  <meta property="og:description" content="This is an excerpt">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2019-10-22T11:13:26-04:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/projects/utils/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Aditya Jaishankar",
+      "url": "http://localhost:4000",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Aditya Jaishankar Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+
+
+
+
+
+
+<link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet">
+
+
+
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/"> </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/" >Home</a>
+            </li><li class="masthead__menu-item">
+              <a href="/coursework/" >Coursework</a>
+            </li><li class="masthead__menu-item">
+              <a href="/projects/" >Projects</a>
+            </li><li class="masthead__menu-item">
+              <a href="/research/" >Ph.D. Research</a>
+            </li><li class="masthead__menu-item">
+              <a href="/publications/" >Publications</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="http://localhost:4000/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/projects" itemprop="item"><span itemprop="name">Projects</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">Molecular solubility from polar charge density images: utils file</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/bio-picture.jpg" alt="Aditya Jaishankar" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Aditya Jaishankar</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        <b>Ph.D., Massachusetts Institute of Technology.</b><br>Soft Condensed Matter Physicist and Surface Scientist.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">New Jersey, USA</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="https://www.github.com/aditya-jaishankar/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/adityajaishankar" rel="nofollow noopener noreferrer"><i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="/assets/misc/Resume_Jaishankar_191020.pdf" rel="nofollow noopener noreferrer"><i class="fas fa-file-alt" aria-hidden="true"></i> Resume</a></li>
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:aditya1642@gmail.com">
+            <meta itemprop="email" content="aditya1642@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Molecular solubility from polar charge density images: utils file">
+    <meta itemprop="description" content="This is an excerpt">
+    
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Molecular solubility from polar charge density images: utils file
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              
+            </nav>
+          </aside>
+        
+        <p>This is the <code class="highlighter-rouge">utils</code> file of the project that makes solubility predictions of molecules based solely on pictures of polar charge density of molecules. The dataset was downloaded from this paper: https://www.nature.com/articles/s41597-019-0151-1</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+
+<span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="kn">import</span> <span class="n">AllChem</span> <span class="k">as</span> <span class="n">Chem</span>
+<span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="kn">import</span> <span class="n">Draw</span>
+<span class="kn">from</span> <span class="nn">rdkit.Chem.Draw</span> <span class="kn">import</span> <span class="n">SimilarityMaps</span>
+
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">imageio</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="c"># matplotlib.use('agg')</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+</code></pre></div></div>
+
+<p>We first binarize the solubility to create a categorical label. We find the median value of the solubility and set everything above that value to be soluble in water, and everything below that to be insoluble.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'./curated-solubility-dataset.csv'</span><span class="p">)</span>
+<span class="n">med</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">'Solubility'</span><span class="p">])</span>
+<span class="c"># If hydrophobic, then label 1, else label 0</span>
+<span class="n">data</span><span class="p">[</span><span class="s">'Solubility'</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">'Solubility'</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">med</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Here we give some general drawing parameters. The idea is to draw the molecules without any atomic labels and just focusing on partial charge density and the color of the bonds (because the atoms are colored). I would expect that molecules with high partial charge densities are soluble in water and low partial charge densities are not soluble in water. This comes from the domaim knowledge of solubility.</p>
+
+<p>Solubility is a complicated problem that requires significant effort in choosing the right features to make the right predictions. The goal of this project is to see how far we can get with just pictures of charge density. As we will see, pretty far!</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">n_mols</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">Draw</span><span class="o">.</span><span class="n">DrawingOptions</span><span class="o">.</span><span class="n">bondLineWidth</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">Draw</span><span class="o">.</span><span class="n">DrawingOptions</span><span class="o">.</span><span class="n">atomLabelFontSize</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">Draw</span><span class="o">.</span><span class="n">DrawingOptions</span><span class="o">.</span><span class="n">atomLabelMinFontSize</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">trim_margin</span> <span class="o">=</span> <span class="mi">20</span>
+</code></pre></div></div>
+
+<p>We next generate the figures of molecular structure and polar charge density using the <code class="highlighter-rouge">python</code> package <code class="highlighter-rouge">rdkit</code>. This is a large dataset so this takes a while. We only have to do this once and save the figures for future use. The code below takes one generated image to determine the image size and trim width.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">shapeParameters</span><span class="p">():</span>
+    <span class="s">"""
+    This function calculates the appropriate shape of im_tensor so that we
+    can appropriately concat all image matrices to it. We need to be able to 
+    preassign the shape correctly
+    """</span>
+
+    <span class="c"># margin and other parameters. I first generate and image and get the</span>
+    <span class="c"># parameters from there. The only user parameter required is the trim</span>
+    <span class="c"># width.</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">smiles</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">'SMILES'</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">category</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">'Solubility'</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+
+    <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
+    <span class="n">Chem</span><span class="o">.</span><span class="n">ComputeGasteigerCharges</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+    <span class="n">contribs</span> <span class="o">=</span> <span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">GetAtomWithIdx</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">GetProp</span><span class="p">(</span><span class="s">'_GasteigerCharge'</span><span class="p">))</span> 
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">())])</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">dir_path</span> <span class="o">+</span> <span class="s">'/figs/mol'</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s">'.png'</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">SimilarityMaps</span><span class="o">.</span><span class="n">GetSimilarityMapFromWeights</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">contribs</span><span class="p">,</span>
+                                                    <span class="n">scale</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span>
+                                                    <span class="n">colorMap</span><span class="o">=</span><span class="s">'bwr'</span><span class="p">,</span> 
+                                                    <span class="n">contourLines</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                                                    <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">250</span><span class="p">))</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s">'tight'</span><span class="p">)</span>
+    
+    <span class="n">im</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">channels</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">trimmed_height</span><span class="p">,</span> <span class="n">trimmed_width</span> <span class="o">=</span> <span class="p">(</span><span class="n">height</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">trim_margin</span><span class="p">,</span> 
+                                             <span class="n">width</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">trim_margin</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">trimmed_width</span><span class="p">,</span> <span class="n">trimmed_height</span>
+</code></pre></div></div>
+
+<p>Next, we convert all the SMILES strings for the entire dataset into partial charge density figures. After we have the figures exported, we convert all of them into torch tensor. Each figure is 3 dimensional of size <code class="highlighter-rouge">[H x W x RGBA]</code></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">molsToImgsToTensor</span><span class="p">():</span>
+    <span class="s">"""
+    This function takes all the molecules in the dataset, generates images of
+    these molecules and daves these as png images
+    """</span>
+    <span class="c"># We need to preallocate the tensor in memory because append/concat is very</span>
+    <span class="c"># slow. We will have a bunch of elements at the end which we will delete</span>
+    <span class="c"># before returning the result by maintaining a counter.</span>
+    <span class="c"># %matplotlib agg</span>
+    <span class="n">trimmed_height</span><span class="p">,</span> <span class="n">trimmed_width</span> <span class="o">=</span> <span class="n">shapeParameters</span><span class="p">()</span>
+    <span class="n">n_mols</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  
+    <span class="n">im_tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_mols</span><span class="p">,</span> <span class="n">trimmed_height</span><span class="p">,</span> <span class="n">trimmed_width</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+                            <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+    <span class="n">category_tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_mols</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">smiles</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">'SMILES'</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">category</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">([</span><span class="n">data</span><span class="p">[</span><span class="s">'Solubility'</span><span class="p">][</span><span class="n">i</span><span class="p">]])</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
+            <span class="n">Chem</span><span class="o">.</span><span class="n">ComputeGasteigerCharges</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+            <span class="n">contribs</span> <span class="o">=</span> <span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">GetAtomWithIdx</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">GetProp</span><span class="p">(</span><span class="s">'_GasteigerCharge'</span><span class="p">))</span> 
+                        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">())])</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="n">dir_path</span> <span class="o">+</span> <span class="s">'/figs/mol'</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s">'.png'</span>
+            <span class="n">fig</span> <span class="o">=</span> <span class="n">SimilarityMaps</span><span class="o">.</span><span class="n">GetSimilarityMapFromWeights</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">contribs</span><span class="p">,</span>
+                                                            <span class="n">scale</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span>
+                                                            <span class="n">colorMap</span><span class="o">=</span><span class="s">'bwr'</span><span class="p">,</span> 
+                                                            <span class="n">contourLines</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                                                            <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">250</span><span class="p">))</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s">'tight'</span><span class="p">)</span>
+            
+            <span class="n">im</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+            <span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">channels</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">shape</span>
+            
+            <span class="n">im</span> <span class="o">=</span> <span class="n">im</span><span class="p">[</span><span class="n">trim_margin</span><span class="p">:</span><span class="o">-</span><span class="n">trim_margin</span><span class="p">,</span> <span class="n">trim_margin</span><span class="p">:</span><span class="o">-</span><span class="n">trim_margin</span><span class="p">,</span> <span class="p">:]</span>
+            <span class="n">im</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">im</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">trimmed_width</span><span class="p">,</span> <span class="n">trimmed_height</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+            <span class="n">im_tensor</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="n">im</span>
+            <span class="c"># im_tensor = torch.cat((im_tensor, im), dim=0)</span>
+            <span class="n">category_tensor</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="n">category</span>
+            <span class="c"># category_tensor = torch.cat((category_tensor, category),</span>
+                                        <span class="c"># dim=0)</span>
+            <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">counter</span><span class="p">,</span> <span class="n">im_tensor</span><span class="o">.</span><span class="n">numpy</span><span class="p">()[:</span><span class="n">counter</span><span class="p">],</span> 
+                     <span class="n">category_tensor</span><span class="o">.</span><span class="nb">int</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()[:</span><span class="n">counter</span><span class="p">])</span>
+
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">counter</span><span class="p">,</span> <span class="n">im_tensor</span><span class="p">,</span> <span class="n">category_tensor</span> <span class="o">=</span> <span class="n">molsToImgsToTensor</span><span class="p">()</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">'./im_tensor'</span><span class="p">,</span> <span class="n">im_tensor</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">'./category_tensor'</span><span class="p">,</span> <span class="n">category_tensor</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>At this point we have a tensor that contains all the images. We then take this
+ tensor and convert this into a data training pair in the main file.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/projects/rnn-arxiv/" class="pagination--pager" title="Automatic scientific abstract text generation
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><input type="text" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2019 Aditya Jaishankar. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML"></script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+inlineMath: [['$','$'], ['\\(','\\)']],
+processEscapes: true},
+jax: ["input/TeX","input/MathML","input/AsciiMath","output/CommonHTML"],
+extensions: ["tex2jax.js","mml2jax.js","asciimath2jax.js","MathMenu.js","MathZoom.js","AssistiveMML.js", "[Contrib]/a11y/accessibility-menu.js"],
+TeX: {
+extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"],
+equationNumbers: {
+autoNumber: "AMS"
+}
+}
+});
+</script>
+
+
+  </body>
+</html>

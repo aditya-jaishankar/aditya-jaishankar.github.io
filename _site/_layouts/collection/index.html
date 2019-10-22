@@ -227,7 +227,7 @@
       
         
         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-          <a href="/_layouts" itemprop="item"><span itemprop="name">_layouts</span></a>
+          <a href="/projects" itemprop="item"><span itemprop="name">Projects</span></a>
           <meta itemprop="position" content="2" />
         </li>
         <span class="sep">/</span>
@@ -235,91 +235,7 @@
     
       
       
-        <li class="current"></li>
-      
-    
-  </ol>
-</nav>
-
-  
-
-
-<div id="main" role="main">
-  
-
-  <div class="archive">
-    
-      <h1 id="page-title" class="page__title"></h1>
-    
-    
-
-
-  
-    
-
-
-
-<nav class="breadcrumbs">
-  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
-    
-    
-    
-      
-        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-          <a href="http://localhost:4000/" itemprop="item"><span itemprop="name">Home</span></a>
-          <meta itemprop="position" content="1" />
-        </li>
-        <span class="sep">/</span>
-      
-      
-        
-        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-          <a href="/_layouts" itemprop="item"><span itemprop="name">_layouts</span></a>
-          <meta itemprop="position" content="2" />
-        </li>
-        <span class="sep">/</span>
-      
-    
-      
-      
-        <li class="current"></li>
-      
-    
-  </ol>
-</nav>
-
-  
-
-
-<div id="main" role="main">
-  
-
-  <div class="archive">
-    
-      <h1 id="page-title" class="page__title"></h1>
-    
-    
-
-
-  
-    
-
-
-
-<nav class="breadcrumbs">
-  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
-    
-    
-    
-      
-        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-          <a href="http://localhost:4000/" itemprop="item"><span itemprop="name">Home</span></a>
-          <meta itemprop="position" content="1" />
-        </li>
-        <span class="sep">/</span>
-      
-      
-        <li class="current">Projects by Category</li>
+        <li class="current">Molecular solubility from polar charge density images: Main file</li>
       
     
   </ol>
@@ -379,7 +295,7 @@
           
         
           
-            <li><a href="https://dspace.mit.edu/handle/1721.1/92159" rel="nofollow noopener noreferrer"><i class="fas fa-file-alt" aria-hidden="true"></i> Resume</a></li>
+            <li><a href="/assets/misc/Resume_Jaishankar_191020.pdf" rel="nofollow noopener noreferrer"><i class="fas fa-file-alt" aria-hidden="true"></i> Resume</a></li>
           
         
       
@@ -456,38 +372,246 @@
   </div>
 
 
-  <div class="archive">
-    
-      <h1 id="page-title" class="page__title">Projects by Category</h1>
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Molecular solubility from polar charge density images: Main file">
+    <meta itemprop="description" content="This is an excerpt">
     
     
 
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Molecular solubility from polar charge density images: Main file
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
 
-<div class="entries-">
+
+
+
+  4 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              
+            </nav>
+          </aside>
+        
+        <p>Now that we have all the figures generated and corresponding numpy arrays for the figures, we can continue with the goal of implementing a convolutional neural network to make solubility predictions.</p>
+
+<p>First we do all the basic imports</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib.backends.backend_agg</span> <span class="kn">import</span> <span class="n">FigureCanvasAgg</span> <span class="k">as</span> <span class="n">FigureCanvas</span>
+<span class="kn">from</span> <span class="nn">matplotlib.figure</span> <span class="kn">import</span> <span class="n">Figure</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="n">nn</span>
+<span class="kn">import</span> <span class="nn">torch.optim</span> <span class="k">as</span> <span class="n">optim</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">DataLoader</span><span class="p">,</span> <span class="n">TensorDataset</span>
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s">'cuda:0'</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm_notebook</span>
+</code></pre></div></div>
+
+<p>Next, we import the exported numpy arrays consisting of all the exported figures. This is quite a large file so can take a while. Note that we will have to transpose the dataset because <code class="highlighter-rouge">torch</code> required the figure format to be <code class="highlighter-rouge">[N, C, H, W]</code> where <code class="highlighter-rouge">C</code> are the channels.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">images_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s">'./im_tensor.npy'</span><span class="p">)</span>
+<span class="n">labels_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s">'./category_tensor.npy'</span><span class="p">)</span>
+
+<span class="n">images_train</span><span class="p">,</span> <span class="n">images_test</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">,</span> <span class="n">labels_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">images_arr</span><span class="p">,</span> <span class="n">labels_arr</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+
+<span class="c"># torch requires images in the format (channels, height, width)</span>
+<span class="n">images_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">images_train</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">images_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">images_test</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>Because of the size of the dataset, we are better off not loading the whole dataset in memory, and instead use the <code class="highlighter-rouge">Dataset</code> class from <code class="highlighter-rouge">torch.utils.data</code>. We can use this to implement our own custom dataset in the form of an iterator. All we need to do is to implement the <code class="highlighter-rouge">__len__()</code> and <code class="highlighter-rouge">__getitem__()</code> methods.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">imagesDataset</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">images</span><span class="p">,</span> <span class="n">categories</span><span class="p">):</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">imagesDataset</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">images</span> <span class="o">=</span> <span class="n">images</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">categories</span> <span class="o">=</span> <span class="n">categories</span>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c"># len() specifies the upper bound for the index of the dataset</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="c"># The generator executes the getitem() method to generate a sample</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">images</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">train_set</span> <span class="o">=</span> <span class="n">imagesDataset</span><span class="p">(</span><span class="n">images_train</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">)</span>
+<span class="n">test_set</span> <span class="o">=</span> <span class="n">imagesDataset</span><span class="p">(</span><span class="n">images_test</span><span class="p">,</span> <span class="n">labels_test</span><span class="p">)</span>
+
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">train_generator</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_set</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">test_generator</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">test_set</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Let us load some structures to see what they look like:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Lets look at some of these structures.</span>
+<span class="n">images</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">train_generator</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">images</span><span class="p">:</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    
+</code></pre></div></div>
+
+<p><img src="/assets/images/projects/cnn-solubility-prediction/output_8_0.png" alt="png" /></p>
+
+<p><img src="/assets/images/projects/cnn-solubility-prediction/output_8_1.png" alt="png" /></p>
+
+<p>![png](/assets/images/projects/cnn-solubility-prediction/(output_8_2.png)</p>
+
+<p><img src="/assets/images/projects/cnn-solubility-prediction/output_8_3.png" alt="png" /></p>
+
+<p><img src="/assets/images/projects/cnn-solubility-prediction/output_8_4.png" alt="png" /></p>
+
+<p>The images show that the polar charge density of the different molecules arising from the chemical nature of the different atoms inthe structure. The intensity of color represents how strong the charge, while the color itself represents whether the char ge is positive (red) or negative (blue). The goal of generating this figure is to use a CNN to check if we get reasonable results for solubility predictions based on the distribution of charge density alone. In reality, solubility is a complicated prediciton to make, with factors such as the 3D structure of the geometry and intermolecular interactions (i.e. how strongly the molecules want to bind to each other) playing a major role.</p>
+
+<p>Next we define the architecture of the CNN we wish to use. We are going to use two convolutiona layers with 32 and 64 channels each with relu activation and max pooling at the end of each activation. We then pass these through two fully connected dense layers and decrease the dimensionality in a step wise direction, again with relu activate. For the very last layer we use a log softmax activation so that we use a negative log likelihood loss function later.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Next we define the CNN we want to use</span>
+
+<span class="k">class</span> <span class="nc">CNN</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">CNN</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">104</span><span class="o">*</span><span class="mi">104</span><span class="o">*</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc3</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">relu</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maxpool</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">MaxPool2d</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logsoftmax</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LogSoftmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">maxpool</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv2</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">maxpool</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">104</span><span class="o">*</span><span class="mi">104</span><span class="o">*</span><span class="mi">64</span><span class="p">)</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc2</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc3</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">logsoftmax</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">x</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">25</span>
+<span class="n">NUM_EPOCHS</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">cnn</span> <span class="o">=</span> <span class="n">CNN</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+<span class="n">objective</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">NLLLoss</span><span class="p">()</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">cnn</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=.</span><span class="mo">001</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">total_loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">NUM_EPOCHS</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_EPOCHS</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">inp</span><span class="p">,</span> <span class="n">labels</span> <span class="ow">in</span> <span class="n">tqdm_notebook</span><span class="p">(</span><span class="n">train_generator</span><span class="p">):</span>
+        <span class="n">inp</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">inp</span><span class="o">.</span><span class="nb">float</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">labels</span><span class="o">.</span><span class="nb">float</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">cnn</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
+
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="c"># The reshaping is because pytorch needs these dimensions for </span>
+        <span class="c"># NLLLoss to work properly. </span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">objective</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(),</span> <span class="n">label</span><span class="o">.</span><span class="nb">long</span><span class="p">()</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+        <span class="n">total_loss</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="o">/</span><span class="p">(</span><span class="o">.</span><span class="mi">8</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">train_generator</span><span class="p">)</span><span class="o">*</span><span class="n">batch_size</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'Loss for Epoch'</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="s">'='</span><span class="p">,</span> <span class="n">total_loss</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">total_loss</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">total_loss</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="s">'./cnn_saved.pt'</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">cnn</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="n">f</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Once we spend the time training, we save the model’s <code class="highlighter-rouge">state_dict()</code> so that we dont have to spend time retraining the model, which takes about an hour despite having access to a RTX 2060 6 GiB NVIDIA GPU. Below we load this trained model.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span> <span class="o">=</span> <span class="s">'./cnn_saved.pt'</span>
+<span class="n">cnn</span> <span class="o">=</span> <span class="n">CNN</span><span class="p">()</span>
+<span class="n">cnn</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+<span class="n">cnn</span><span class="o">.</span><span class="nb">eval</span><span class="p">()</span>
+<span class="n">cnn</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">validation</span><span class="p">():</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">inp</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">tqdm_notebook</span><span class="p">(</span><span class="n">test_generator</span><span class="p">):</span>
+        <span class="n">preds</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">cnn</span><span class="p">(</span><span class="n">inp</span><span class="o">.</span><span class="nb">float</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="n">label</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">errors</span> <span class="o">+=</span> <span class="n">torch</span><span class="o">.</span><span class="nb">sum</span><span class="p">((</span><span class="n">preds</span><span class="o">==</span><span class="n">labels</span><span class="p">)</span><span class="o">*</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">errors</span><span class="o">*</span><span class="mi">100</span><span class="o">/</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test_generator</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">batch_size</span><span class="o">/</span><span class="mi">5</span><span class="p">))</span>
+<span class="c"># The factor of 5 exists because the test_generator dataset object</span>
+<span class="c"># was created using a batch_size of 5, while the training set was</span>
+<span class="c"># created with a batch_size of 25</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">accuracy</span> <span class="o">=</span> <span class="n">validation</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'accuracy:'</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">,</span> <span class="s">'</span><span class="si">%</span><span class="s">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>accuracy: 73.66834170854271 %
+</code></pre></div></div>
+
+<p>We see that just by looking at images of the polar charge density, we are able to get a prediction accuracy of about 75%. This is remarkable given how simplistic our model is. Random chance would dictate that we should hit 50%, so our model has learned something about the physics of solubility. Of course, if we were interested in solubility in other solvents instead of water, our predictions would not be great.</p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      
+
+      
+    </div>
+
+    
+  </article>
+
+  
   
 </div>
 
-  </div>
-</div>
-
-
-
-
-<ul class="taxonomy__index">
-  
-</ul>
-
-
-
-  </div>
-</div>
-
-<div class="entries-">
-  
-</div>
-
-  </div>
-</div>
 
 <div class="entries-">
   

@@ -37,7 +37,7 @@ $$
 \end{align}
 $$
 
-This is a fundamental result in the finite difference numerical scheme from which many other approxiations to higher order derivatives can be derived.
+This is a fundamental result in the finite difference numerical scheme from which many other approximations to higher order derivatives can be derived.
 
 ## Step 1: 1-D Linear Convection
 
@@ -113,7 +113,7 @@ nt = 25
 dt = .025
 c = 1   
 
-# Setting up the intial and boundary conditions
+# Setting up the initial and boundary conditions
 u = numpy.ones(nx)      #numpy function ones()
 u[int(.5 / dx):int(1 / dx + 1)] = 2  #setting u = 2 between 0.5 and 
                                      # 1 as per our I.C.s
@@ -133,7 +133,7 @@ plt.plot(np.linspace(0, 2, nx), u);
 
 ![test image size](/assets/images/coursenotes/CFDpython/step1.png){: width="75%" .align-center}
 
-Here we see something strange! Our intial conditions suggest that we had a square pulse, and given the nature of the wave equation (with no diffusion or convection for now), we would expect this square to simply translate along x with time, but we see a rounded square here! This has happened because of numerical diffusion: our values of $\Delta x$ were too large. Indeed, we can make $\Delta x$ smaller and check that the intial square pulse translates as a square. 
+Here we see something strange! Our initial conditions suggest that we had a square pulse, and given the nature of the wave equation (with no diffusion or convection for now), we would expect this square to simply translate along x with time, but we see a rounded square here! This has happened because of numerical diffusion: our values of $\Delta x$ were too large. Indeed, we can make $\Delta x$ smaller and check that the initial square pulse translates as a square. 
 
 We made some arbitrary choices around the values of $\Delta x$ and $\Delta t$. Playing with the code, you will see that for some values of the $\Delta x$ and $\Delta t$, the solution seems unstable and in reality, we need to be careful about the how we go about choosing $\Delta x$ and $\Delta t$. We require that the distance traveled $u\Delta t$ travelled by the wave in the time interval $\Delta t$ be less than the chosen value of $\Delta x$. There is detailed theory behind this, capture by the Courant-Friendrichs-Lewy (CLF) condition.[^2] Formally, we require
 
@@ -155,7 +155,7 @@ $$
 \end{align}
 $$
 
-Using the ideas above, it is simple to discretize this equation, and solving for the unkown term $u_i^{n+1}$, we have
+Using the ideas above, it is simple to discretize this equation, and solving for the unknown term $u_i^{n+1}$, we have
 
 $$
 \begin{align}
@@ -201,7 +201,7 @@ u_{i+1} + u_{i-1} & = 2\left( u_i + \dfrac{\Delta x^2}{2!} \left.\dfrac{\partial
 \end{align}
 $$
 
-The terms on the LHS tells us that we have performed a *central difference* (CD), as opposed to the forward and backward differemce, FD anf BD, we have seen so far. The CD ignores terms of $O(\Delta x^2)$, while FD and BD ignore terms of order $O(\Delta x)$ and hence has higher accuracy. Discretizing the equations by using Equations \eqref{eqn:timeapprox} and \eqref{eqn:second-order-discrete}  in \eqref{eqn:diffusion1d} and rearranging terms, we have
+The terms on the LHS tells us that we have performed a *central difference* (CD), as opposed to the forward and backward difference, FD anf BD, we have seen so far. The CD ignores terms of $O(\Delta x^2)$, while FD and BD ignore terms of order $O(\Delta x)$ and hence has higher accuracy. Discretizing the equations by using Equations \eqref{eqn:timeapprox} and \eqref{eqn:second-order-discrete}  in \eqref{eqn:diffusion1d} and rearranging terms, we have
 
 $$
 \begin{align}
@@ -217,7 +217,7 @@ $$
 \end{align}
 $$
 
-The physical intuition remains the same: $\nu \Delta t$ is the the root-mean-square distance traveled by a fluid element in time $\Delta t$ because of diffusion and this has to be a constant fraction $\sigma < 1$ of $\Delta x^2$. Below we implement Equation \eqref{eqn:1ddiffusion-discrete} in Python, while omitting the code for intializing variables and setting initial conditions, which has already been shown in Step 1)
+The physical intuition remains the same: $\nu \Delta t$ is the the root-mean-square distance traveled by a fluid element in time $\Delta t$ because of diffusion and this has to be a constant fraction $\sigma < 1$ of $\Delta x^2$. Below we implement Equation \eqref{eqn:1ddiffusion-discrete} in Python, while omitting the code for initializing variables and setting initial conditions, which has already been shown in Step 1)
 
 ```python
 for n in range(nt):
@@ -229,7 +229,7 @@ for n in range(nt):
 ```
 ![test image size](/assets/images/coursenotes/CFDpython/step3-lowdiff.png){: width="49%"} ![test image size](/assets/images/coursenotes/CFDpython/step3-highdiff.png){: width="49%"}
 
-The image on the left was generated with `nt = 20` and the one on the righ with `nt = 400`. We see how diffusion tends to 'smear out' the intial square velocity waveform. 
+The image on the left was generated with `nt = 20` and the one on the righ with `nt = 400`. We see how diffusion tends to 'smear out' the initial square velocity waveform. 
 
 ## Step 4: Burgers' Equation
 
@@ -249,7 +249,7 @@ u_i^{n+1} = u_i^n - u_i^n \frac{\Delta t}{\Delta x} (u_i^n - u_{i-1}^n) + \nu \f
 \end{align}
 $$
 
-along with the intial and boundary conditions given in Equation \eqref{eqn:ICs}. Because this is a straightforward implementation of steps 2 and 3 in a single equation, we omit any detailed analysis and move on to step 5. 
+along with the initial and boundary conditions given in Equation \eqref{eqn:ICs}. Because this is a straightforward implementation of steps 2 and 3 in a single equation, we omit any detailed analysis and move on to step 5. 
 
 ## Step 5: 2-D Linear Convection
 
@@ -269,7 +269,7 @@ u_{i,j}^{n+1} = u_{i,j}^n-c \frac{\Delta t}{\Delta x}(u_{i,j}^n-u_{i-1,j}^n)-c \
 \end{equation}
 $$
 
-So far, because we lived in 1-D space we modeled $u_i$ as a being a vector of length $M+1$. While expanding to 2 dimensions, we now model $u_{i,j}$ as being a 2-D array, indexed by indices $i,j$.  The intial and boundary conditions are
+So far, because we lived in 1-D space we modeled $u_i$ as a being a vector of length $M+1$. While expanding to 2 dimensions, we now model $u_{i,j}$ as being a 2-D array, indexed by indices $i,j$.  The initial and boundary conditions are
 
 $$
 \begin{align}
