@@ -41,7 +41,7 @@ var store = [{
         "teaser":null},{
         "title": "MNIST digit classification (Kaggle)",
         "excerpt":"import numpy as np import matplotlib.pyplot as plt import pandas as pd from torch.utils.data import DataLoader, TensorDataset import torch import torch.nn as nn import torch.optim as optim device = torch.device('cuda:0') import os from tqdm import tqdm # cwd = os.path.dirname(os.path.realpath(__file__)) train_data = torch.tensor(pd.read_csv('./train.csv').values, dtype=torch.float) test_data = torch.tensor(pd.read_csv('./test.csv').values, dtype=torch.float) labels =...","categories": [],
-        "tags": ["Naive-Bayes-Classifier"],
+        "tags": [],
         "url": "http://localhost:4000/projects/MNISTdigitprediction/",
         "teaser":null},{
         "title": "SMILES string generation given hydrophobic/hydrophilic label",
