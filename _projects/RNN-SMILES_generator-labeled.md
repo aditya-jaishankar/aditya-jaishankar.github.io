@@ -1,11 +1,8 @@
 ---
 title: "SMILES string generation given hydrophobic/hydrophilic label"
-toc: true
 layout: single
 permalink: /projects/rnn-smiles-generator/
 author_profile: true
-excerpt: "This is an excerpt"
-read_time: true
 ---
 
  In this file, we are trying to implement all of our learnings from the previous failed runs of simple recurrent neural network. Here we use a gated neural network.

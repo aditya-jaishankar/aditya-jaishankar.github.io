@@ -1,12 +1,8 @@
 ---
 title: "MNIST digit classification (Kaggle)"
-toc: true
 layout: single
 permalink: /projects/MNISTdigitprediction/
 author_profile: true
-tags: [Naive-Bayes-Classifier]
-excerpt: "This is an excerpt"
-read_time: true
 ---
 
 ```python

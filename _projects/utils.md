@@ -1,11 +1,8 @@
 ---
 title: "Molecular solubility from polar charge density images: utils file"
-toc: true
 layout: single
 permalink: /projects/utils/
 author_profile: true
-excerpt: "This is an excerpt"
-read_time: true
 ---
 
 This is the `utils` file of the project that makes solubility predictions of molecules based solely on pictures of polar charge density of molecules. The dataset was downloaded from this paper: https://www.nature.com/articles/s41597-019-0151-1

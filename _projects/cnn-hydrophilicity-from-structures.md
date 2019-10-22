@@ -1,11 +1,8 @@
 ---
 title: "Molecular solubility from polar charge density images: Main file"
-toc: true
 layout: single
 permalink: /projects/cnn-hydrophilicity-from-structures/
 author_profile: true
-excerpt: "This is an excerpt"
-read_time: true
 ---
 
 Now that we have all the figures generated and corresponding numpy arrays for the figures, we can continue with the goal of implementing a convolutional neural network to make solubility predictions.

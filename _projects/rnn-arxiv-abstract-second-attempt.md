@@ -1,11 +1,8 @@
 ---
 title: "Automatic scientific abstract text generation"
-toc: true
 layout: single
 permalink: /projects/rnn-arxiv/
 author_profile: true
-excerpt: "This is an excerpt"
-read_time: true
 ---
 
 ## Basic Imports

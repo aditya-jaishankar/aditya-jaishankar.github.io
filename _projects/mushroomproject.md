@@ -1,12 +1,8 @@
 ---
 title: "Mushroom Toxicity Prediction "
-toc: true
 layout: single
 permalink: /projects/mushroomproject/
 author_profile: true
-tags: [Naive-Bayes-Classifier]
-excerpt: "This is an excerpt"
-read_time: true
 ---
 
 # Mushrooms: to eat or not to eat?

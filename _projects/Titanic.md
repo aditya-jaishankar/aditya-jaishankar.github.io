@@ -1,11 +1,8 @@
 ---
 title: "Titanic Survival Prediction"
-toc: true
 layout: single
 permalink: /projects/Titanic/
 author_profile: true
-excerpt: "This is an excerpt"
-read_time: true
 ---
 
 

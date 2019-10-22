@@ -64,11 +64,6 @@ var store = [{
         "tags": ["Naive-Bayes-Classifier"],
         "url": "http://localhost:4000/projects/mushroomproject/",
         "teaser":null},{
-        "title": "Project1: The mushrooom project",
-        "excerpt":"Does this work well? What about math?   Equation    ","categories": [],
-        "tags": ["Naive-Bayes-Classifier"],
-        "url": "http://localhost:4000/projects/project1/",
-        "teaser":null},{
         "title": "Automatic scientific abstract text generation",
         "excerpt":"Basic Imports import urllib import re from bs4 import BeautifulSoup import numpy as np from tqdm import tqdm import matplotlib.pyplot as plt # import itertools import string import random import torch import torch.nn as nn from torch.utils.data import Dataset, DataLoader import torch.optim as optim device = torch.device('cuda:0' if torch.cuda.is_available() else...","categories": [],
         "tags": [],
