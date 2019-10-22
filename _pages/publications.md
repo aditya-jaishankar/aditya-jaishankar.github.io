@@ -5,7 +5,7 @@ author_profile: true
 layout: single
 ---
 
-BLURB GOES HERE
+My publications span a wide diversity of experimental and theoretical across both surface science as well as soft matter physics. Full text copies of these papers are available upon request. 
 
 14. Jusufi, A., Jaishankar, A., Onodera, K., Vreeland, J., Konicek, A. R., Watanabe, H., ... & Schilowitz, A. M. (2019). Adsorption properties of molybdenum based FMs on boron-doped DLC. Wear, 426, 805-812.
 <br>[DOI: 10.1016/j.wear.2018.12.008](https://doi.org/10.1016/j.wear.2018.12.008)
