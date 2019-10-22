@@ -61,7 +61,7 @@ var store = [{
         "teaser":null},{
         "title": "Mushroom Toxicity Prediction ",
         "excerpt":"Mushrooms: to eat or not to eat? I love mushrooms. I also love hiking. Often, I see various types of mushrooms on strewn around the forest floor. The diversity of the different kinds of mushrooms I see is truly staggering. The type of mushroom depends on geography of course: which...","categories": [],
-        "tags": ["Naive-Bayes-Classifier"],
+        "tags": [],
         "url": "http://localhost:4000/projects/mushroomproject/",
         "teaser":null},{
         "title": "Automatic scientific abstract text generation",
