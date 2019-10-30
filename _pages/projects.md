@@ -18,7 +18,7 @@ layout: single
   </ul>
 {% endfor %} -->
 
-This page contains a listing of some of the projects I have implements on my self study journey. All of these projects were implemented by me from scratch. 
+This page contains a listing of some of the projects I have implemented on my self study journey. All of these projects were implemented by me from scratch. 
 
 **Please click through the project links below to access full jupyter notebooks exported as `markdown` files.**
 
@@ -30,7 +30,7 @@ One alternative is to use artificial neural networks to solve the PDEs. The idea
 
 ## Solubility prediction of organic molecules from images of charge density
 
-[Utils file](/projects/utils)
+[Utils file](/projects/utils)<br>
 [Main code](/projects/cnn-hydrophilicity-from-structures/)
 
 In this project, we aim to make predictions of molecular solubility in water from the [AqSolDB](https://www.nature.com/articles/s41597-019-0151-1) dataset, which contains solubility data along with relevant features of nearly 10,000 molecules. As a proof of concept, we explore in this project if we can make solubility predictions based solely on images of polar charge density. This project was conceived with some domain knowledge in mind; water is a polar molecules, and is likely to dissolve other polar molecules, (i.e.) molecules that have significant polar charge density. The hypothesis is that if we draw maps of polar charge density of the molecules (using the `rdkit` library), we might be able to make predictions by using a convolutional neural network to extract these polar features from the image.
@@ -57,6 +57,6 @@ neural networks and feed forward neural networks work.
 
 In this basic project, I implement a Naive Bayes classifier to predict if a mushroom is likely to be toxic or not given all of its attributes. Here I do some significant data exploration, cleaning and feature selection. We then use the Naive Bayes Classifier to find out the most significant features that either cause a mushroom to be poisonous or be edible. More detailed notes are available within the project file. 
 
-## [Titanic Survivor Prediction](/projects/Titanic/)
+## [Titanic survivor prediction](/projects/Titanic/)
 
 This was simple project that implemented a k-Nearest Neighbors scheme using `scikit-learn` to make predictions on whether a passenger is likely to have survived or not. I also included a small loop to look at the influence of the number of neighbors hyper parameter to find the optimal number to look at the trade off between low training error but poorer validation error (arising from over-fitting). 
