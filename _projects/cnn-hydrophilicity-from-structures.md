@@ -100,7 +100,7 @@ for image in images:
 
 
 
-![png](/assets/images/projects/cnn-solubility-prediction/(output_8_2.png)
+![png](/assets/images/projects/cnn-solubility-prediction/output_8_2.png)
 
 
 
