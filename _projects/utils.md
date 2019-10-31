@@ -152,8 +152,3 @@ np.save('./category_tensor', category_tensor)
 
  At this point we have a tensor that contains all the images. We then take this
  tensor and convert this into a data training pair in the main file.
-
-
-```python
-
-```
