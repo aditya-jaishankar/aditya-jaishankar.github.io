@@ -64,6 +64,11 @@ var store = [{
         "tags": [],
         "url": "http://localhost:4000/projects/mushroomproject/",
         "teaser":null},{
+        "title": "Solution of partial differential equations using neural networks",
+        "excerpt":"Solving differential equations using Neural networks In this project, we attempt to solve ordinary differntial equations using Neural Networks. The Cybenko theorem states that an aritifical neural network with one hidden layer can approximate any continuous function on $\\mathbb{R}^n$ under some mild assumptions on the activate function (for example the...","categories": [],
+        "tags": [],
+        "url": "http://localhost:4000/projects/neuralpde/",
+        "teaser":null},{
         "title": "Automatic scientific abstract text generation",
         "excerpt":"Basic Imports import urllib import re from bs4 import BeautifulSoup import numpy as np from tqdm import tqdm import matplotlib.pyplot as plt # import itertools import string import random import torch import torch.nn as nn from torch.utils.data import Dataset, DataLoader import torch.optim as optim device = torch.device('cuda:0' if torch.cuda.is_available() else...","categories": [],
         "tags": [],

@@ -107,7 +107,7 @@ analytics:
 # Site Author
 author:
   name             : "Aditya Jaishankar"
-  avatar           : "/assets/images/bio-picture.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "/assets/images/profile.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "<b>Ph.D., Massachusetts Institute of Technology.</b><br>Soft Condensed Matter Physicist and Surface Scientist."            
   location         : "New Jersey, USA"
   email            : aditya1642@gmail.com
