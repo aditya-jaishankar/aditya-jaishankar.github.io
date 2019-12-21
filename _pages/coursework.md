@@ -5,9 +5,12 @@ permalink: /coursework/
 author_profile: true
 ---
 
-Below is a list of online courses I have completed during my self-study program. In many cases, I transcribed my course notes into `markdown` files as a personal reference to which I can come back to refresh concepts. I hope visitors to my website find these notes useful - please click through the buttons below to access. 
+Below is a list of online courses I have completed during my self-study program. In many cases, I transcribed my course notes into `markdown` files as a personal reference to which I can come back to refresh concepts. I hope you find these notes useful - please click through the buttons below to access. 
 
 ## Coursework
+
+* [Prof. Tim Roughgarden's specialization on Algorithms (Stanford)](https://www.coursera.org/specializations/algorithms)
+  <br>In progress.
 
 * [Prof. David Silver's course on reinforcement learning (University College London)](http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching.html)
 
