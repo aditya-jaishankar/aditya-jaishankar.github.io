@@ -22,7 +22,15 @@ This page contains a listing of some of the projects I have implemented on my se
 
 **Please click through the project links below to access full jupyter notebooks exported as `markdown` files.**
 
-## [Solution of partial differential equations using neural networks](/projects/neuralpde)
+## [Denoising text images]
+
+This project is currently in progress. Please check back soon!
+
+## [The Higgs Boson Machine Learning Challenge](/projects/higgs/)
+
+In this [Kaggle challenge](https://www.kaggle.com/c/higgs-boson/overview), we are given two types of entries in a numerical dataset; rows representing significant signals that has features of a tau-tau decay, and rows representing background signals that has no significance. The signal is usually deeply buried in the noise, so is difficult to identify. The goal is to use machine learning to help distinguish the significant traces that contain meaningful data from the background traces with nothing of significance. The (labeled) dataset provided had a number of missing entries, and these missing entries were arbitrarily provided a value of -999.0, so I had to implement data cleaning and normalizing steps to prevent these from unduly influencing the data. The details of my implementation can be found in the code. I implemented a deep neural network architecture with a cross entropy loss function to perform binary classification: does a particular data vector represent signal or noise? With my architecture, I was able to distinguish meaningful signals from background noise with an accuracy of over 99.5%. 
+
+## [Solution of partial differential equations using neural networks](/projects/neuralpde/)
 
 The solution of PDEs is of critical importance to a large variety of physical problems. However, except for the most elementary cases, there are no analytical closed form solution to most PDEs describing phenomena in practical applications. There are various numerical ways that can be used to solve these equations, some more computationally efficient, and accurate than others. In my own research I have spent a significant amount of time implementing finite difference schemes to solve partial differential equations. This can be very computationally intensive and can take very long, even on multi-core computing clusters. 
 

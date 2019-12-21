@@ -39,6 +39,11 @@ var store = [{
         "tags": [],
         "url": "http://localhost:4000/coursenotes/statistics/",
         "teaser":null},{
+        "title": "Higgs Boson Machine Learning Challenge",
+        "excerpt":"Higgs Boson ML Challenge URL: https://www.kaggle.com/c/higgs-boson/overview In this challenge, we are given two types of signals, a significant signal that has features of a tau-tau decay, and a background signal that has no significance. The signal is usually deeply buried in the noise, so is difficult to identify. The goal...","categories": [],
+        "tags": [],
+        "url": "http://localhost:4000/projects/higgs/",
+        "teaser":null},{
         "title": "MNIST digit classification (Kaggle)",
         "excerpt":"import numpy as np import matplotlib.pyplot as plt import pandas as pd from torch.utils.data import DataLoader, TensorDataset import torch import torch.nn as nn import torch.optim as optim device = torch.device('cuda:0') import os from tqdm import tqdm # cwd = os.path.dirname(os.path.realpath(__file__)) train_data = torch.tensor(pd.read_csv('./train.csv').values, dtype=torch.float) test_data = torch.tensor(pd.read_csv('./test.csv').values, dtype=torch.float) labels =...","categories": [],
         "tags": [],
