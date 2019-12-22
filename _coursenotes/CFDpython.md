@@ -3,6 +3,7 @@ title: "Computational Fluid Dynamics Python (CFD) - Python"
 categories:
 toc: true
 layout: single
+classes: wide
 permalink: /coursenotes/CFDpython/
 author_profile: true
 read_time: true

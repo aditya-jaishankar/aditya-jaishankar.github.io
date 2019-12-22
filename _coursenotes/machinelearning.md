@@ -3,6 +3,7 @@ title: "Machine Learning with Python - From Linear Models to Deep Learning"
 categories:
 toc: true
 layout: single
+classes: wide
 permalink: /coursenotes/machinelearning/
 author_profile: true
 toc: true

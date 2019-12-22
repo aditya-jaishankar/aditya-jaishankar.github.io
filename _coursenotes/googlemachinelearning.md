@@ -3,6 +3,7 @@ title: "Google Machine Learning Crash Course"
 categories:
 toc: true
 layout: single
+classes: wide
 permalink: /coursenotes/googlemachinelearning/
 author_profile: true
 read_time: true

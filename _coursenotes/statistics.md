@@ -3,6 +3,7 @@ title: "Fundamentals of Statistics(18.6501x)"
 categories:
 toc: true
 layout: single
+classes: wide
 permalink: /coursenotes/statistics/
 author_profile: true
 toc: true

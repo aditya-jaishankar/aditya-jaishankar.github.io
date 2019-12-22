@@ -3,6 +3,7 @@ title: "Probability: The Science and Uncertainty of Data (6.431x)"
 categories:
 toc: true
 layout: single
+classes: wide
 permalink: /coursenotes/probability/
 author_profile: true
 toc: true
