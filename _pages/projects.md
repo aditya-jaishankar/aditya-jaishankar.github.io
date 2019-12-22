@@ -3,6 +3,8 @@ title: "Projects"
 permalink: /projects/
 author_profile: true
 layout: single
+classes: wide
+
 ---
 
 <!-- {% assign tags =  site.projects | map: 'tags' | join: ','  | split: ',' | uniq %}

@@ -1,6 +1,7 @@
 ---
 title: "Coursework"
 layout: single
+classes: wide
 permalink: /coursework/
 author_profile: true
 ---

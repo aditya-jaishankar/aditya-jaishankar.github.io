@@ -3,6 +3,8 @@ title: "Publications"
 permalink: /publications/
 author_profile: true
 layout: single
+classes: wide
+
 ---
 
 My publications span a wide diversity of experimental and theoretical work across  soft matter physics and surface science. Full text copies of these papers are available upon request. 
