@@ -6,7 +6,7 @@ layout: single
 classes: wide
 ---
 
-My Ph.D. thesis is available [here](https://dspace.mit.edu/handle/1721.1/92159?show=full). You can download the entire thesis [here (35 MB)](https://dspace.mit.edu/bitstream/handle/1721.1/92159/897123391-MIT.pdf?sequence=2&isAllowed=y).
+My Ph.D. thesis is available [here](https://dspace.mit.edu/handle/1721.1/92159?show=full). You can download the entire thesis [here (35 MB)](https://dspace.mit.edu/bitstream/handle/1721.1/92159/897123391-MIT.pdf?sequence=2&isAllowed=y). Does this line show up?
 
 We typically learn in grade school that all materials can be classified as either being a solid, liquid, or a gas. However this is a vast simplification of real life. Materials we use daily in critical applications are often neither solid nor liquid: they can be soft, squishy, stretchy, slimy, tacky, stringy, etc. How does one classify chewing gum, or silly putty, or even toothpaste? How about a sand dune that remains stable in a mound for centuries under quiescent conditions - much like a solid - but can flow downhill like a liquid when a strong breeze destabilizes the dune? See this [fascinating video](https://www.youtube.com/watch?v=1bALzkp16mw) of how sand can flow like a liquid. 
 
