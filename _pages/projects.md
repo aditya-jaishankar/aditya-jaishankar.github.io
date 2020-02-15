@@ -24,9 +24,9 @@ This page contains a listing of some of the projects I have implemented on my se
 
 **Please click through the project links below to access full jupyter notebooks exported as `markdown` files.**
 
-## Denoising text images
+<!-- ## Denoising text images
 
-This project is currently in progress. Please check back soon!
+This project is currently in progress. Please check back soon! -->
 
 ## [The Higgs Boson Machine Learning Challenge](/projects/higgs/)
 
