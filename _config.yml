@@ -110,7 +110,7 @@ analytics:
 author:
   name             : "Aditya Jaishankar"
   avatar           : "/assets/images/profile.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "<b>Ph.D., Massachusetts Institute of Technology.</b><br>Soft Condensed Matter Physicist and Surface Scientist."            
+  bio              : "<b>Ph.D., Massachusetts Institute of Technology.</b><br>Soft Matter Physicist and Surface Scientist."            
   location         : "New Jersey, USA"
   email            : aditya1642@gmail.com
   links:
@@ -137,7 +137,7 @@ author:
       url: "https://www.linkedin.com/in/adityajaishankar"
     - label: "Resume"
       icon: "fas fa-file-alt"
-      url: "/assets/misc/Resume_Jaishankar_191220.pdf"
+      url: "/assets/misc/Aditya_Jaishankar_Final.pdf"
 # sidebar:
 #   - title: "Sample block"
 #     text: "Physicist" 
