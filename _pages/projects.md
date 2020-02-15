@@ -47,7 +47,7 @@ In this project, we aim to make predictions of molecular solubility in water fro
 
 This project has two files: A [utils](/projects/utils/) file that contains code for generating images of the polar charge density and applying other data preprocessing, and a [main](/projects/cnn-hydrophilicity-from-structures/) file that contains the code that implements both a `torch.utils.Dataset.DataLoader` object and a CNN.
 
-## [Scientific abstract automatic text generation](/projects/rnn-arxiv/)
+## [Automatic scientific abstract text generation](/projects/rnn-arxiv/)
 
 Anyone who has submitted scientific abstracts to conferences knows it tends to slip through the cracks and we tend to make it in just before the submission deadline. Wouldn't it be nice to have an abstract automatically written? In this project, I implement a LSTM-feed forward neural network structure for automatic character level text generation based on a corpus of abstracts downloaded through Cornell University's arxiv [API](https://arxiv.org/help/api). The html files were parsed with `BeautifulSoup` and then fed into the network for character level automatic text generation.
 
